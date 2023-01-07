@@ -5,10 +5,10 @@ import { useStore } from "./src/hooks/useStore";
 import { Home } from "./src/screens/Home";
 
 export default function App() {
-  const { getData } = useStore();
+  const { getGoals } = useStore();
 
   useEffect(() => {
-    getData();
+    getGoals();
   }, []);
 
   return (
