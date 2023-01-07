@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { useStore } from "../hooks/useStore";
+import { useGoals } from "../hooks/useGoals";
 import { Card } from "../components/Card";
 import { NewGoalModal } from "../components/NewGoalModal";
 import { ConfirmationModal } from "../components/ConfirmationModal";
@@ -8,7 +8,7 @@ import { ConfirmationModal } from "../components/ConfirmationModal";
 export const Home = () => {
   const [isNewGoalModalOpen, setIsNewGoalModalOpen] = useState(false);
 
-  const { goals, clearStore } = useStore();
+  const { goals, clearStore } = useGoals();
 
   const toggleNewGoalModal = () => {
     setIsNewGoalModalOpen(!isNewGoalModalOpen);

@@ -1,5 +1,5 @@
 import { View, Text, ViewProps, TouchableOpacity } from "react-native";
-import { Goal, useStore } from "../hooks/useStore";
+import { Goal, useGoals } from "../hooks/useGoals";
 import { Plus } from "./Icons/Plus";
 import { Minus } from "./Icons/Minus";
 import { Trash } from "./Icons/Trash";
@@ -12,7 +12,7 @@ type CardProps = {
 
 export const Card = ({ goal }: CardProps) => {
   const { current, total, name, id } = goal;
-  const { deleteGoal, updateGoal } = useStore();
+  const { deleteGoal, updateGoal } = useGoals();
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
   const toggleConfirmationModal = () => {

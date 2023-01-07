@@ -7,7 +7,7 @@ import {
   View,
   TextInput,
 } from "react-native";
-import { useStore } from "../hooks/useStore";
+import { useGoals } from "../hooks/useGoals";
 import { Close } from "./Icons/Close";
 
 type NewGoalModalProps = {
@@ -19,7 +19,7 @@ export const NewGoalModal = ({ open, onClose }: NewGoalModalProps) => {
   const [goalName, setGoalName] = useState("");
   const [total, setTotal] = useState("");
 
-  const { addGoal } = useStore();
+  const { addGoal } = useGoals();
 
   const handleSubmit = () => {
     addGoal(goalName, total);

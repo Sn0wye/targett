@@ -19,7 +19,7 @@ type Store = {
   updateGoal: (id: string, current: number) => void;
 };
 
-export const useStore = create<Store>((set, get) => ({
+export const useGoals = create<Store>((set, get) => ({
   goals: [],
   getGoals: async () => {
     try {

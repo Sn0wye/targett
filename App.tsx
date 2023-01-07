@@ -1,11 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { View } from "react-native";
-import { useStore } from "./src/hooks/useStore";
+import { useGoals } from "./src/hooks/useGoals";
 import { Home } from "./src/screens/Home";
 
 export default function App() {
-  const { getGoals } = useStore();
+  const { getGoals } = useGoals();
 
   useEffect(() => {
     getGoals();
