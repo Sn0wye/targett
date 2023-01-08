@@ -3,5 +3,5 @@
 - [ ] Rename/Update
 - [ ] Empty State
 - [ ] Notifications
-- [ ] Header with logo
+- [x] Header
 - [x] Fix app icon.
