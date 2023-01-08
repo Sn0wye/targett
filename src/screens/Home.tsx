@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { Card } from '../components/Card';
+import { Header } from '../components/Header';
 import { NewGoalModal } from '../components/NewGoalModal';
 import { useGoals } from '../hooks/useGoals';
 
@@ -17,6 +18,7 @@ export const Home = () => {
   return (
     <>
       <View className='h-full w-full'>
+        <Header />
         {goals &&
           goals.length > 0 &&
           goals.map(goal => <Card key={goal.id} goal={goal} />)}
