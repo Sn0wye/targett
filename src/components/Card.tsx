@@ -57,7 +57,7 @@ export const Card = ({ goal }: CardProps) => {
       <View className='relative mt-2 rounded-xl bg-gray-800 p-4'>
         <View className='flex-row items-start justify-between'>
           <Text className='text-2xl text-gray-100'>{name}</Text>
-          <TouchableOpacity className='' onPress={toggleConfirmationModal}>
+          <TouchableOpacity onPress={toggleConfirmationModal}>
             <Trash color='#ef4444' />
           </TouchableOpacity>
         </View>
