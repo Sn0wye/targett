@@ -20,14 +20,7 @@ type Store = {
 };
 
 export const useGoals = create<Store>((set, get) => ({
-  goals: [
-    {
-      id: '123',
-      current: 100,
-      name: 'teste',
-      total: 200
-    }
-  ],
+  goals: [],
   getGoals: async () => {
     try {
       const goals = await AsyncStorage.getItem('@targett-goals');
