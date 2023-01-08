@@ -4,4 +4,4 @@
 - [ ] Empty State
 - [ ] Notifications
 - [ ] Header with logo
-- [ ] Fix app icon.
+- [x] Fix app icon.
