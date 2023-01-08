@@ -1,24 +1,81 @@
-import { useState } from 'react';
-import { View, Text, ViewProps, TouchableOpacity } from 'react-native';
+import { useMemo } from 'react';
+import { View, Text, Dimensions } from 'react-native';
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import Animated, {
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming
+} from 'react-native-reanimated';
 
 import { Goal, useGoals } from '../hooks/useGoals';
-import { ConfirmationModal } from './ConfirmationModal';
-import { Minus } from './Icons/Minus';
-import { Plus } from './Icons/Plus';
+import { Actions } from './Actions';
+import { GoalCount } from './GoalCount';
 import { Trash } from './Icons/Trash';
-
 type CardProps = {
   goal: Goal;
 };
 
 export const Card = ({ goal }: CardProps) => {
   const { current, total, name, id } = goal;
-  const { deleteGoal, updateGoal } = useGoals();
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
-  const toggleConfirmationModal = () => {
-    setIsConfirmationModalOpen(!isConfirmationModalOpen);
-  };
+  const { width } = Dimensions.get('window');
+
+  const translateXThreshold = width * 0.2;
+
+  const translateX = useSharedValue(0);
+  const marginTop = useSharedValue(8);
+  const itemHeight = useSharedValue(200);
+  const iconOpacity = useSharedValue(1);
+
+  const { deleteGoal, updateGoal } = useGoals();
+
+  const gesture = useMemo(
+    () =>
+      Gesture.Pan()
+        .onUpdate(e => {
+          translateX.value = e.translationX < 0 ? e.translationX : 0;
+        })
+        .onEnd(e => {
+          const shouldDelete = e.translationX < -translateXThreshold;
+          if (shouldDelete) {
+            translateX.value = withTiming(-width);
+            itemHeight.value = withTiming(0);
+            marginTop.value = withTiming(0);
+            iconOpacity.value = withTiming(0, undefined, isFinished => {
+              if (isFinished) {
+                runOnJS(deleteGoal)(id);
+              }
+            });
+          } else {
+            translateX.value = withTiming(0);
+          }
+        }),
+    [
+      translateX,
+      translateXThreshold,
+      width,
+      itemHeight,
+      marginTop,
+      iconOpacity,
+      deleteGoal,
+      id
+    ]
+  );
+
+  const cardStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: translateX.value }]
+  }));
+
+  const iconStyle = useAnimatedStyle(() => ({
+    opacity: withTiming(translateX.value < -translateXThreshold ? 1 : 0),
+    height: 200
+  }));
+
+  const containerStyle = useAnimatedStyle(() => ({
+    marginTop: marginTop.value,
+    opacity: iconOpacity.value
+  }));
 
   const handleIncrement = () => {
     updateGoal(id, current < total ? current + 1 : current);
@@ -28,82 +85,29 @@ export const Card = ({ goal }: CardProps) => {
     updateGoal(id, current > 0 ? current - 1 : current);
   };
 
-  const currentCells = String(current)
-    .split('')
-    .map((digit, i) => {
-      const ml = i === 0 ? 0 : 8;
-
-      return (
-        <Cell key={i} style={{ marginLeft: ml }}>
-          {digit}
-        </Cell>
-      );
-    });
-
-  const totalCells = String(total)
-    .split('')
-    .map((digit, i) => {
-      const ml = i === 0 ? 12 : 8;
-
-      return (
-        <Cell key={i} style={{ marginLeft: ml }}>
-          {digit}
-        </Cell>
-      );
-    });
-
   return (
-    <>
-      <View className='relative mt-2 rounded-xl bg-gray-800 p-4'>
-        <View className='flex-row items-start justify-between'>
+    <Animated.View style={containerStyle}>
+      <Animated.View
+        className={`absolute right-0 top-0 w-24 items-center justify-center`}
+        style={iconStyle}
+      >
+        <Trash size={50} color='#ef4444' />
+      </Animated.View>
+      <GestureDetector gesture={gesture}>
+        <Animated.View
+          className='relative rounded-xl bg-gray-800 p-4'
+          style={cardStyle}
+        >
           <Text className='text-2xl text-gray-100'>{name}</Text>
-          <TouchableOpacity onPress={toggleConfirmationModal}>
-            <Trash color='#ef4444' />
-          </TouchableOpacity>
-        </View>
-        <View className='mt-4 flex-col items-end justify-between'>
-          <View className='w-full flex-row items-center'>
-            {currentCells}
-            <Separator className='ml-3'>/</Separator>
-            {totalCells}
+          <View className='mt-4 flex-col items-end justify-between'>
+            <GoalCount current={current} total={total} />
+            <Actions
+              onIncrement={handleIncrement}
+              onDecrement={handleDecrement}
+            />
           </View>
-          <View className='mt-4 flex-row'>
-            <TouchableOpacity
-              className='h-10 w-10 items-center justify-center rounded-lg bg-gray-700'
-              onPress={handleDecrement}
-            >
-              <Minus />
-            </TouchableOpacity>
-            <TouchableOpacity
-              className='ml-1 h-10 w-10 items-center justify-center rounded-lg bg-gray-700'
-              onPress={handleIncrement}
-            >
-              <Plus />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-      <ConfirmationModal
-        open={isConfirmationModalOpen}
-        onClose={toggleConfirmationModal}
-        onConfirm={() => deleteGoal(id)}
-      />
-    </>
-  );
-};
-
-const Separator = ({ children, ...props }: ViewProps) => {
-  return (
-    <View {...props}>
-      <Text className='text-5xl text-white'>{children}</Text>
-    </View>
-  );
-};
-
-const Cell = ({ children, ...props }: ViewProps) => {
-  return (
-    <View className='rounded-lg bg-gray-700 px-2 pt-3 pb-1' {...props}>
-      <Text className='text-5xl text-white'>{children}</Text>
-    </View>
+        </Animated.View>
+      </GestureDetector>
+    </Animated.View>
   );
 };
