@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
-import { View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { useGoals } from './src/hooks/useGoals';
@@ -15,10 +15,10 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <View className='flex-1 bg-gray-900 px-4 pt-12'>
+      <GestureHandlerRootView className='flex-1 bg-gray-900 px-4 pt-12'>
         <StatusBar style='light' />
         <Home />
-      </View>
+      </GestureHandlerRootView>
     </SafeAreaProvider>
   );
 }

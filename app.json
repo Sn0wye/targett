@@ -5,7 +5,15 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "dark"
+    "userInterfaceStyle": "dark",
+    "extra": {
+      "eas": {
+        "projectId": "22751e82-985c-495e-aea7-1a53241f86e8"
+      }
+    },
+    "android": {
+      "package": "com.sn0wye.targett"
+    }
   },
   "splash": {
     "image": "./assets/splash.png",
@@ -15,7 +23,9 @@
   "updates": {
     "fallbackToCacheTimeout": 0
   },
-  "assetBundlePatterns": ["**/*"],
+  "assetBundlePatterns": [
+    "**/*"
+  ],
   "ios": {
     "supportsTablet": true
   },

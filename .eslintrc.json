@@ -1,6 +1,7 @@
 {
   "extends": "@sn0wye/eslint-config/react",
   "rules": {
-    "jsx-a11y/alt-text": "off"
+    "jsx-a11y/alt-text": "off",
+    "tailwindcss/no-custom-classname": "off"
   }
 }
