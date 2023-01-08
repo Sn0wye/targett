@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "build:apk": "eas build -p android --profile preview"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "~1.17.3",
