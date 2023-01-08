@@ -69,13 +69,13 @@ export const Card = ({ goal }: CardProps) => {
           </View>
           <View className='mt-4 flex-row'>
             <TouchableOpacity
-              className='h-10 w-10 items-center justify-center rounded-lg bg-gray-600'
+              className='h-10 w-10 items-center justify-center rounded-lg bg-gray-700'
               onPress={handleDecrement}
             >
               <Minus />
             </TouchableOpacity>
             <TouchableOpacity
-              className='ml-1 h-10 w-10 items-center justify-center rounded-lg bg-gray-600'
+              className='ml-1 h-10 w-10 items-center justify-center rounded-lg bg-gray-700'
               onPress={handleIncrement}
             >
               <Plus />
