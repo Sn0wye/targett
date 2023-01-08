@@ -61,21 +61,21 @@ export const Card = ({ goal }: CardProps) => {
             <Trash color='#ef4444' />
           </TouchableOpacity>
         </View>
-        <View className='mt-4 flex-row items-end justify-between'>
-          <View className='flex-row items-center'>
+        <View className='mt-4 flex-col items-end justify-between'>
+          <View className='w-full flex-row items-center'>
             {currentCells}
             <Separator className='ml-3'>/</Separator>
             {totalCells}
           </View>
-          <View className='flex-row'>
+          <View className='mt-4 flex-row'>
             <TouchableOpacity
-              className='h-8 w-8 items-center justify-center rounded-lg bg-gray-600'
+              className='h-10 w-10 items-center justify-center rounded-lg bg-gray-600'
               onPress={handleDecrement}
             >
               <Minus />
             </TouchableOpacity>
             <TouchableOpacity
-              className='ml-1 h-8 w-8 items-center justify-center rounded-lg bg-gray-600'
+              className='ml-1 h-10 w-10 items-center justify-center rounded-lg bg-gray-600'
               onPress={handleIncrement}
             >
               <Plus />
