@@ -3,5 +3,4 @@
 - [ ] Rename/Update
 - [ ] Empty State
 - [ ] Notifications
-- [x] Header
-- [x] Fix app icon.
+- [ ] Implement delete confirmation modal
