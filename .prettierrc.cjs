@@ -1,12 +1,12 @@
 /** @type {import("prettier").Config} */
 module.exports = {
-  arrowParens: 'always',
+  arrowParens: 'avoid',
   printWidth: 80,
-  singleQuote: false,
-  jsxSingleQuote: false,
+  singleQuote: true,
+  jsxSingleQuote: true,
   semi: true,
-  trailingComma: 'all',
+  trailingComma: 'none',
   tabWidth: 2,
   plugins: [require.resolve('prettier-plugin-tailwindcss')],
-  tailwindConfig: './tailwind.config.js'
+  tailwindConfig: './tailwind.config.js',
 };

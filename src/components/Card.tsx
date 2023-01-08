@@ -55,7 +55,12 @@ export const Card = ({ goal }: CardProps) => {
   return (
     <>
       <View className='relative mt-2 rounded-xl bg-gray-800 p-4'>
-        <Text className='text-2xl text-gray-100'>{name}</Text>
+        <View className='flex-row items-start justify-between'>
+          <Text className='text-2xl text-gray-100'>{name}</Text>
+          <TouchableOpacity className='' onPress={toggleConfirmationModal}>
+            <Trash color='#ef4444' />
+          </TouchableOpacity>
+        </View>
         <View className='mt-4 flex-row items-end justify-between'>
           <View className='flex-row items-center'>
             {currentCells}
@@ -77,12 +82,6 @@ export const Card = ({ goal }: CardProps) => {
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity
-          className='absolute top-0 right-0 p-4'
-          onPress={toggleConfirmationModal}
-        >
-          <Trash color='#ef4444' />
-        </TouchableOpacity>
       </View>
       <ConfirmationModal
         open={isConfirmationModalOpen}
