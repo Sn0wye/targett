@@ -8,6 +8,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "build:apk": "eas build -p android --profile preview"
   },
   "dependencies": {
@@ -25,8 +27,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@sn0wye/eslint-config": "^1.8.1",
     "@types/react": "~18.0.14",
     "@types/react-native": "~0.70.6",
+    "eslint": "^8.31.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.2",
     "prettier-plugin-tailwindcss": "^0.2.1",

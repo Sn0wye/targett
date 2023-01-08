@@ -1,10 +1,10 @@
-import { SvgXml } from "react-native-svg";
+import { SvgXml } from 'react-native-svg';
 
 interface TrashProps {
   color?: string;
 }
 
-export function Trash({ color = "#fff" }: TrashProps) {
+export function Trash({ color = '#fff' }: TrashProps) {
   const markup = `<svg width="24" height="24" viewBox="0 0 256 256">
   <path
     fill="${color}"

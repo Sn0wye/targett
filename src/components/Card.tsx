@@ -1,10 +1,11 @@
-import { View, Text, ViewProps, TouchableOpacity } from "react-native";
-import { Goal, useGoals } from "../hooks/useGoals";
-import { Plus } from "./Icons/Plus";
-import { Minus } from "./Icons/Minus";
-import { Trash } from "./Icons/Trash";
-import { ConfirmationModal } from "./ConfirmationModal";
-import { useState } from "react";
+import { useState } from 'react';
+import { View, Text, ViewProps, TouchableOpacity } from 'react-native';
+
+import { Goal, useGoals } from '../hooks/useGoals';
+import { ConfirmationModal } from './ConfirmationModal';
+import { Minus } from './Icons/Minus';
+import { Plus } from './Icons/Plus';
+import { Trash } from './Icons/Trash';
 
 type CardProps = {
   goal: Goal;
@@ -28,7 +29,7 @@ export const Card = ({ goal }: CardProps) => {
   };
 
   const currentCells = String(current)
-    .split("")
+    .split('')
     .map((digit, i) => {
       const ml = i === 0 ? 0 : 8;
 
@@ -40,7 +41,7 @@ export const Card = ({ goal }: CardProps) => {
     });
 
   const totalCells = String(total)
-    .split("")
+    .split('')
     .map((digit, i) => {
       const ml = i === 0 ? 12 : 8;
 
@@ -53,23 +54,23 @@ export const Card = ({ goal }: CardProps) => {
 
   return (
     <>
-      <View className="relative mt-2 rounded-xl bg-gray-800 p-4">
-        <Text className="text-2xl text-gray-100">{name}</Text>
-        <View className="mt-4 flex-row items-end justify-between">
-          <View className="flex-row items-center">
+      <View className='relative mt-2 rounded-xl bg-gray-800 p-4'>
+        <Text className='text-2xl text-gray-100'>{name}</Text>
+        <View className='mt-4 flex-row items-end justify-between'>
+          <View className='flex-row items-center'>
             {currentCells}
-            <Separator className="ml-3">/</Separator>
+            <Separator className='ml-3'>/</Separator>
             {totalCells}
           </View>
-          <View className="flex-row">
+          <View className='flex-row'>
             <TouchableOpacity
-              className="h-8 w-8 items-center justify-center rounded-lg bg-gray-600"
+              className='h-8 w-8 items-center justify-center rounded-lg bg-gray-600'
               onPress={handleDecrement}
             >
               <Minus />
             </TouchableOpacity>
             <TouchableOpacity
-              className="ml-1 h-8 w-8 items-center justify-center rounded-lg bg-gray-600"
+              className='ml-1 h-8 w-8 items-center justify-center rounded-lg bg-gray-600'
               onPress={handleIncrement}
             >
               <Plus />
@@ -77,10 +78,10 @@ export const Card = ({ goal }: CardProps) => {
           </View>
         </View>
         <TouchableOpacity
-          className="absolute top-0 right-0 p-4"
+          className='absolute top-0 right-0 p-4'
           onPress={toggleConfirmationModal}
         >
-          <Trash color="#ef4444" />
+          <Trash color='#ef4444' />
         </TouchableOpacity>
       </View>
       <ConfirmationModal
@@ -95,15 +96,15 @@ export const Card = ({ goal }: CardProps) => {
 const Separator = ({ children, ...props }: ViewProps) => {
   return (
     <View {...props}>
-      <Text className="text-5xl text-white">{children}</Text>
+      <Text className='text-5xl text-white'>{children}</Text>
     </View>
   );
 };
 
 const Cell = ({ children, ...props }: ViewProps) => {
   return (
-    <View className="rounded-lg bg-gray-700 px-2 pt-3 pb-1" {...props}>
-      <Text className="text-5xl text-white">{children}</Text>
+    <View className='rounded-lg bg-gray-700 px-2 pt-3 pb-1' {...props}>
+      <Text className='text-5xl text-white'>{children}</Text>
     </View>
   );
 };

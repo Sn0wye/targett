@@ -1,11 +1,11 @@
-import { SvgXml } from "react-native-svg";
+import { SvgXml } from 'react-native-svg';
 
 interface PlusProps {
   color?: string;
   size?: number;
 }
 
-export function Plus({ color = "#fff", size = 16 }: PlusProps) {
+export function Plus({ color = '#fff', size = 16 }: PlusProps) {
   const markup = `<svg width="${size}" height="${size}" viewBox="0 0 24 24">
   <path
     fill="${color}"
