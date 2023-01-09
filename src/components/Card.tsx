@@ -34,7 +34,7 @@ export const Card = ({ goal }: CardProps) => {
     () =>
       Gesture.Pan()
         .onUpdate(e => {
-          translateX.value = e.translationX < 0 ? e.translationX : 0;
+          translateX.value = e.translationX < 0 ? e.translationX : 0; // TODO: remove this to use left gesture
         })
         .onEnd(e => {
           const shouldDelete = e.translationX < -translateXThreshold;
