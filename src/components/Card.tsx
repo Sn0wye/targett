@@ -21,7 +21,7 @@ export const Card = ({ goal }: CardProps) => {
 
   const { width } = Dimensions.get('window');
 
-  const translateXThreshold = width * 0.2;
+  const deleteXThreshold = width * 0.2;
 
   const translateX = useSharedValue(0);
   const marginTop = useSharedValue(8);
@@ -37,7 +37,7 @@ export const Card = ({ goal }: CardProps) => {
           translateX.value = e.translationX < 0 ? e.translationX : 0; // TODO: remove this to use left gesture
         })
         .onEnd(e => {
-          const shouldDelete = e.translationX < -translateXThreshold;
+          const shouldDelete = e.translationX < -deleteXThreshold;
           if (shouldDelete) {
             translateX.value = withTiming(-width);
             itemHeight.value = withTiming(0);
@@ -53,7 +53,7 @@ export const Card = ({ goal }: CardProps) => {
         }),
     [
       translateX,
-      translateXThreshold,
+      deleteXThreshold,
       width,
       itemHeight,
       marginTop,
@@ -68,7 +68,7 @@ export const Card = ({ goal }: CardProps) => {
   }));
 
   const iconStyle = useAnimatedStyle(() => ({
-    opacity: withTiming(translateX.value < -translateXThreshold ? 1 : 0),
+    opacity: withTiming(translateX.value < -deleteXThreshold ? 1 : 0),
     height: 200
   }));
 
