@@ -1,6 +1,7 @@
 # TODOs
 
-- [ ] Rename/Update
+- [x] Rename/Update
 - [ ] Empty State
 - [ ] Notifications
-- [ ] Implement delete confirmation modal
+- [x] Implement delete confirmation modal
+- [ ] FlatList scroll
