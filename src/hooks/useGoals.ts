@@ -16,7 +16,8 @@ type Store = {
   getGoals: () => void;
   clearStore: () => void;
   deleteGoal: (id: string) => void;
-  updateGoal: (id: string, current: number) => void;
+  updateCurrent: (id: string, current: number) => void;
+  updateGoal: (id: string, goal: Partial<Goal>) => void;
 };
 
 export const useGoals = create<Store>((set, get) => ({
@@ -72,13 +73,30 @@ export const useGoals = create<Store>((set, get) => ({
       console.error(e);
     }
   },
-  updateGoal: async (id, current) => {
+  updateCurrent: async (id, current) => {
     try {
       const data = await AsyncStorage.getItem('@targett-goals');
       if (data !== null) {
         const newGoals = JSON.parse(data).map((item: Goal) => {
           if (item.id === id) {
             return { ...item, current };
+          }
+          return item;
+        });
+        await AsyncStorage.setItem('@targett-goals', JSON.stringify(newGoals));
+        set({ goals: newGoals });
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  },
+  updateGoal: async (id, goal) => {
+    try {
+      const data = await AsyncStorage.getItem('@targett-goals');
+      if (data !== null) {
+        const newGoals = JSON.parse(data).map((item: Goal) => {
+          if (item.id === id) {
+            return { ...item, ...goal };
           }
           return item;
         });
