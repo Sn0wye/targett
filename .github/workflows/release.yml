@@ -34,4 +34,4 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
       - name: Publish
-        run: pnpm build:apk
+        run: pnpm build:apk --non-interactive
