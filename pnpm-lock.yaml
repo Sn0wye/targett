@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@babel/core': ^7.12.9
+  '@hookform/resolvers': ^2.9.10
   '@react-native-async-storage/async-storage': ~1.17.3
   '@sn0wye/eslint-config': ^1.8.1
   '@types/react': ~18.0.14
@@ -17,6 +18,7 @@ specifiers:
   prettier-plugin-tailwindcss: ^0.2.1
   react: 18.1.0
   react-dom: 18.1.0
+  react-hook-form: ^7.42.0
   react-native: 0.70.5
   react-native-gesture-handler: ~2.8.0
   react-native-reanimated: ~2.12.0
@@ -27,9 +29,11 @@ specifiers:
   react-native-web: ~0.18.9
   tailwindcss: ^3.2.4
   typescript: ^4.6.3
+  zod: ^3.20.2
   zustand: ^4.2.0
 
 dependencies:
+  '@hookform/resolvers': 2.9.10_react-hook-form@7.42.0
   '@react-native-async-storage/async-storage': 1.17.11_react-native@0.70.5
   expo: 47.0.12_@babel+core@7.20.12
   expo-status-bar: 1.4.2
@@ -38,6 +42,7 @@ dependencies:
   nativewind: 2.0.11_f3xea42f6zrwqyr5c6mbkdauxa
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
+  react-hook-form: 7.42.0_react@18.1.0
   react-native: 0.70.5_7vw2fevm7cxfkwynop5qx4c5l4
   react-native-gesture-handler: 2.8.0_tj3nonr5gneraukzjkxpsiy7yu
   react-native-reanimated: 2.12.0_mvrt5vo44hdi3gmxgieophka6i
@@ -46,6 +51,7 @@ dependencies:
   react-native-svg: 13.4.0_tj3nonr5gneraukzjkxpsiy7yu
   react-native-uuid: 2.0.1
   react-native-web: 0.18.10_ef5jwxihqo6n7gxfmzogljlgcm
+  zod: 3.20.2
   zustand: 4.2.0_react@18.1.0
 
 devDependencies:
@@ -1833,6 +1839,14 @@ packages:
     resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==}
     dependencies:
       '@hapi/hoek': 9.3.0
+    dev: false
+
+  /@hookform/resolvers/2.9.10_react-hook-form@7.42.0:
+    resolution: {integrity: sha512-JIL1DgJIlH9yuxcNGtyhsWX/PgNltz+5Gr6+8SX9fhXc/hPbEIk6wPI82nhgvp3uUb6ZfAM5mqg/x7KR7NAb+A==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.42.0_react@18.1.0
     dev: false
 
   /@humanwhocodes/config-array/0.11.8:
@@ -8327,6 +8341,15 @@ packages:
       scheduler: 0.22.0
     dev: false
 
+  /react-hook-form/7.42.0_react@18.1.0:
+    resolution: {integrity: sha512-XDEjSUZmT68FOSv2FaD3XlN1sa2HB9vIQ9SVKsogGrHUY43o2aANQDC9LgHa4zusqCMKLG3qitpTcEhpYWHBFw==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.1.0
+    dev: false
+
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -9982,6 +10005,10 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  /zod/3.20.2:
+    resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
+    dev: false
 
   /zustand/4.2.0_react@18.1.0:
     resolution: {integrity: sha512-eNwaDoD2FYVnMgtNxiMUhTJO780wonZUzJrPQTLYI0erSIMZF8cniWFW22kGQUECd8rdHRJ/ZJL2XO54c9Ttuw==}
