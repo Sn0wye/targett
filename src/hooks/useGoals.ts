@@ -12,12 +12,12 @@ export type Goal = {
 type Store = {
   goals: Goal[] | undefined;
   setData: (data: Goal[]) => void;
-  addGoal: (goalName: string, total: string) => void;
+  createNewGoal: (goal: Pick<Goal, 'name' | 'total'>) => void;
   getGoals: () => void;
   clearStore: () => void;
-  deleteGoal: (id: string) => void;
-  updateCurrent: (id: string, current: number) => void;
-  updateGoal: (id: string, goal: Partial<Goal>) => void;
+  deleteGoal: (id: Goal['id']) => void;
+  updateCurrent: (id: Goal['id'], current: Goal['current']) => void;
+  updateGoal: (id: Goal['id'], goal: Partial<Goal>) => void;
 };
 
 export const useGoals = create<Store>((set, get) => ({
@@ -33,12 +33,12 @@ export const useGoals = create<Store>((set, get) => ({
     }
   },
   setData: goals => set({ goals }),
-  addGoal: async (goalName, total) => {
+  createNewGoal: async goal => {
     const id = uuid.v4() as string;
     const newGoal = {
       id,
-      name: goalName,
-      total: Number(total),
+      name: goal.name,
+      total: goal.total,
       current: 0
     };
 
