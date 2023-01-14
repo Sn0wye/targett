@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Controller, useForm } from 'react-hook-form';
 import {
   Modal,
   KeyboardAvoidingView,
@@ -7,9 +8,17 @@ import {
   View,
   TextInput
 } from 'react-native';
+import { z } from 'zod';
 
 import { useGoals } from '../hooks/useGoals';
 import { Close } from './Icons/Close';
+
+const formSchema = z.object({
+  goalName: z.string().min(1).max(50),
+  total: z.string().min(1).max(3)
+});
+
+type FormFields = z.infer<typeof formSchema>;
 
 type NewGoalModalProps = {
   open: boolean;
@@ -17,16 +26,28 @@ type NewGoalModalProps = {
 };
 
 export const NewGoalModal = ({ open, onClose }: NewGoalModalProps) => {
-  const [goalName, setGoalName] = useState('');
-  const [total, setTotal] = useState('');
+  const { control, handleSubmit, setValue } = useForm<FormFields>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      goalName: '',
+      total: ''
+    }
+  });
 
-  const { addGoal } = useGoals();
+  const { createNewGoal } = useGoals();
 
-  const handleSubmit = () => {
-    addGoal(goalName, total);
-    setGoalName('');
-    setTotal('');
+  const onSubmit = (data: FormFields) => {
+    const { goalName, total } = data;
+
+    createNewGoal({
+      name: goalName,
+      total: +total
+    });
+
     onClose();
+
+    setValue('goalName', '');
+    setValue('total', '');
   };
 
   return (
@@ -49,26 +70,40 @@ export const NewGoalModal = ({ open, onClose }: NewGoalModalProps) => {
             </TouchableOpacity>
           </View>
           <View className='mt-8'>
-            <TextInput
-              className='mb-2 rounded-lg bg-gray-700 p-4 text-white'
-              placeholder='Nome da meta'
-              placeholderTextColor='#7C7C8A'
-              value={goalName}
-              onChangeText={setGoalName}
+            <Controller
+              name='goalName'
+              control={control}
+              render={({ field: { onBlur, onChange, value } }) => (
+                <TextInput
+                  className='mb-2 rounded-lg bg-gray-700 p-4 text-white'
+                  placeholder='Nome da meta'
+                  placeholderTextColor='#7C7C8A'
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={onChange}
+                />
+              )}
             />
 
-            <TextInput
-              className='mb-6 rounded-lg bg-gray-700 p-4 text-white'
-              placeholder='Total de Etapas'
-              placeholderTextColor='#7C7C8A'
-              keyboardType='number-pad'
-              value={total}
-              onChangeText={setTotal}
+            <Controller
+              name='total'
+              control={control}
+              render={({ field: { onBlur, onChange, value } }) => (
+                <TextInput
+                  className='mb-6 rounded-lg bg-gray-700 p-4 text-white'
+                  placeholder='Total de Etapas'
+                  placeholderTextColor='#7C7C8A'
+                  keyboardType='number-pad'
+                  onBlur={onBlur}
+                  value={String(value) || ''}
+                  onChangeText={onChange}
+                />
+              )}
             />
 
             <TouchableOpacity
               className='items-center justify-center rounded-lg bg-gray-800 py-3 px-6'
-              onPress={handleSubmit}
+              onPress={handleSubmit(onSubmit)}
             >
               <Text className='text-white'>Salvar</Text>
             </TouchableOpacity>
