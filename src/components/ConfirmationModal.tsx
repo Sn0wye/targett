@@ -1,8 +1,8 @@
 import {
-  Modal,
   KeyboardAvoidingView,
-  TouchableOpacity,
+  Modal,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 
@@ -12,12 +12,14 @@ type ConfirmationModalProps = {
   open: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  onCancel?: () => void;
 };
 
 export const ConfirmationModal = ({
   open,
   onClose,
-  onConfirm
+  onConfirm,
+  onCancel = () => {}
 }: ConfirmationModalProps) => {
   return (
     <Modal
@@ -44,7 +46,10 @@ export const ConfirmationModal = ({
           <View className='mt-8 flex-row justify-end'>
             <TouchableOpacity
               className='mr-2 items-center justify-center rounded-lg bg-gray-800 py-3 px-6'
-              onPress={onClose}
+              onPress={() => {
+                onClose();
+                onCancel();
+              }}
             >
               <Text className='text-white'>Cancelar</Text>
             </TouchableOpacity>
