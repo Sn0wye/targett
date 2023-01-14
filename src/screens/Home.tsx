@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 
 import { Card } from '../components/Card';
 import { Header } from '../components/Header';
@@ -21,7 +21,11 @@ export const Home = () => {
       <View className='h-full w-full'>
         <Header />
         {goals && goals.length > 0 ? (
-          goals.map(goal => <Card key={goal.id} goal={goal} />)
+          <FlatList
+            data={goals}
+            keyExtractor={goal => goal.id}
+            renderItem={({ item }) => <Card goal={item} />}
+          />
         ) : (
           <NoGoals onCreate={toggleNewGoalModal} />
         )}
