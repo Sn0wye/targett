@@ -13,13 +13,13 @@ export const Actions = ({ onIncrement, onDecrement }: ActionsProps) => {
     <View className='mt-4 flex-row'>
       <TouchableOpacity
         className='h-10 w-10 items-center justify-center rounded-lg bg-gray-700'
-        onPress={onIncrement}
+        onPress={onDecrement}
       >
         <Minus />
       </TouchableOpacity>
       <TouchableOpacity
         className='ml-1 h-10 w-10 items-center justify-center rounded-lg bg-gray-700'
-        onPress={onDecrement}
+        onPress={onIncrement}
       >
         <Plus />
       </TouchableOpacity>
