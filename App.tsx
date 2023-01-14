@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import { NativeBaseProvider } from 'native-base';
 import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -14,11 +15,13 @@ export default function App() {
   }, [getGoals]);
 
   return (
-    <SafeAreaProvider>
-      <GestureHandlerRootView className='flex-1 bg-gray-900 px-4 pt-12'>
-        <StatusBar style='light' />
-        <Home />
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
+    <NativeBaseProvider>
+      <SafeAreaProvider>
+        <GestureHandlerRootView className='flex-1 bg-gray-900 px-4 pt-12'>
+          <StatusBar style='light' />
+          <Home />
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </NativeBaseProvider>
   );
 }
