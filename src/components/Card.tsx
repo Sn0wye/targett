@@ -40,6 +40,7 @@ export const Card = ({ goal }: CardProps) => {
   const gesture = useMemo(
     () =>
       Gesture.Pan()
+        .minDistance(30)
         .onUpdate(e => {
           translateX.value = e.translationX;
         })
