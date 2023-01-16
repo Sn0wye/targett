@@ -50,8 +50,12 @@ export const useGoals = create<Store>((set, get) => ({
     }
 
     const newData = [...previousGoals, newGoal];
-    await AsyncStorage.setItem('@targett-goals', JSON.stringify(newData));
-    set({ goals: newData });
+    try {
+      await AsyncStorage.setItem('@targett-goals', JSON.stringify(newData));
+      set({ goals: newData });
+    } catch (e) {
+      console.error(e);
+    }
   },
   clearStore: async () => {
     try {
@@ -65,9 +69,15 @@ export const useGoals = create<Store>((set, get) => ({
     try {
       const data = await AsyncStorage.getItem('@targett-goals');
       if (data !== null) {
-        const newGoals = JSON.parse(data).filter((item: any) => item.id !== id);
-        await AsyncStorage.setItem('@targett-goals', JSON.stringify(newGoals));
-        set({ goals: newGoals });
+        const goals: Goal[] = JSON.parse(data);
+        const newGoals = goals.filter(item => item.id !== id);
+        if (goals.length !== newGoals.length) {
+          await AsyncStorage.setItem(
+            '@targett-goals',
+            JSON.stringify(newGoals)
+          );
+          set({ goals: newGoals });
+        }
       }
     } catch (e) {
       console.error(e);
@@ -94,7 +104,7 @@ export const useGoals = create<Store>((set, get) => ({
     try {
       const data = await AsyncStorage.getItem('@targett-goals');
       if (data !== null) {
-        const newGoals = JSON.parse(data).map((item: Goal) => {
+        const newGoals: Goal[] = JSON.parse(data).map((item: Goal) => {
           if (item.id === id) {
             return { ...item, ...goal };
           }
