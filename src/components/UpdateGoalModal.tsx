@@ -47,6 +47,7 @@ export const UpdateGoalModal = ({
   const onSubmit = (data: FormFields) => {
     updateGoal(id, {
       ...data,
+      name: data.goalName,
       total: +data.total,
       current: +data.current
     });
