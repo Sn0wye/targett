@@ -13,7 +13,7 @@ type Store = {
   goals: Goal[] | undefined;
   setData: (data: Goal[]) => void;
   createNewGoal: (goal: Pick<Goal, 'name' | 'total'>) => void;
-  getGoals: () => void;
+  getGoals: () => Promise<void>;
   clearStore: () => void;
   deleteGoal: (id: Goal['id']) => void;
   updateCurrent: (id: Goal['id'], current: Goal['current']) => void;

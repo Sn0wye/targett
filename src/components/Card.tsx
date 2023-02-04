@@ -1,13 +1,16 @@
+import { useToast } from 'native-base';
 import { useMemo, useState } from 'react';
 import { Dimensions, Text, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
+  FadeInDown,
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withTiming
 } from 'react-native-reanimated';
 
+import { pickRandomPhrase } from '../data/phrases';
 import { Goal, useGoals } from '../hooks/useGoals';
 import { Actions } from './Actions';
 import { ConfirmationModal } from './ConfirmationModal';
@@ -15,6 +18,7 @@ import { GoalCount } from './GoalCount';
 import { Edit } from './Icons/Edit';
 import { Trash } from './Icons/Trash';
 import { UpdateGoalModal } from './UpdateGoalModal';
+
 type CardProps = {
   goal: Goal;
 };
@@ -53,6 +57,7 @@ export const Card = ({ goal }: CardProps) => {
           }
 
           if (shouldDelete) {
+            translateX.value = withTiming(0);
             runOnJS(setIsConfirmationModalOpen)(true);
           } else {
             translateX.value = withTiming(0);
@@ -80,8 +85,22 @@ export const Card = ({ goal }: CardProps) => {
     opacity: iconOpacity.value
   }));
 
+  const toast = useToast();
+
   const handleIncrement = () => {
-    updateCurrent(id, current < total ? current + 1 : current);
+    updateCurrent(id, current + 1);
+
+    if (current + 1 === total) {
+      toast.show({
+        title: 'Parabéns!',
+        description: pickRandomPhrase(),
+        background: '#29292E',
+        borderLeftColor: '#22c55e',
+        borderLeftWidth: 4,
+        px: 4,
+        marginBottom: 8
+      });
+    }
   };
 
   const handleDecrement = () => {
@@ -107,7 +126,7 @@ export const Card = ({ goal }: CardProps) => {
 
   return (
     <>
-      <Animated.View style={containerStyle}>
+      <Animated.View style={containerStyle} entering={FadeInDown}>
         <Animated.View
           className={`absolute right-0 top-0 w-24 items-center justify-center`}
           style={deleteIconStyle}
