@@ -1,14 +1,15 @@
-import { type NextApiHandler } from "next";
-import { appRouter } from "@targett/api";
-import { nextHandler } from "trpc-playground/handlers/next";
+import { type NextApiHandler } from 'next';
+import { nextHandler } from 'trpc-playground/handlers/next';
+
+import { appRouter } from '@targett/api';
 
 const setupHandler = nextHandler({
   router: appRouter,
-  trpcApiEndpoint: "/api/trpc/",
-  playgroundEndpoint: "/api/trpc-playground",
+  trpcApiEndpoint: '/api/trpc/',
+  playgroundEndpoint: '/api/trpc-playground',
   request: {
-    superjson: true,
-  },
+    superjson: true
+  }
 });
 
 const handler: NextApiHandler = async (req, res) => {

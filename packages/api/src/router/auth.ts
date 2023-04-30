@@ -1,6 +1,4 @@
-import { type User } from "@clerk/nextjs/api";
-
-import { protectedProcedure, publicProcedure, router } from "../trpc";
+import { protectedProcedure, publicProcedure, router } from '../trpc';
 
 // const filterUser = (user: User) => {
 //   if (!user) return null;
@@ -19,6 +17,6 @@ export const authRouter = router({
     return ctx.auth.userId;
   }),
   getSecretMessage: protectedProcedure.query(() => {
-    return "you can see this secret message!";
-  }),
+    return 'you can see this secret message!';
+  })
 });

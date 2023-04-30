@@ -1,10 +1,11 @@
-import { appRouter, createTRPCContext } from "@targett/api";
-import { createNextApiHandler } from "@trpc/server/adapters/next";
+import { createNextApiHandler } from '@trpc/server/adapters/next';
+
+import { appRouter, createTRPCContext } from '@targett/api';
 
 // export API handler
 export default createNextApiHandler({
   router: appRouter,
-  createContext: createTRPCContext,
+  createContext: createTRPCContext
 });
 
 // If you need to enable cors, you can do so like this:

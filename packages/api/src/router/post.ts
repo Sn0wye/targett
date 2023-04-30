@@ -1,15 +1,15 @@
-import { TRPCError } from "@trpc/server";
-import { type Redis } from "@upstash/redis";
-import { nanoid } from "nanoid";
-import { z } from "zod";
+import { TRPCError } from '@trpc/server';
+import { type Redis } from '@upstash/redis';
+import { nanoid } from 'nanoid';
+import { z } from 'zod';
 
-import { type Post } from "@targett/db";
+import { type Post } from '@targett/db';
 
-import { publicProcedure, router } from "../trpc";
+import { publicProcedure, router } from '../trpc';
 
 const getPostById = async (redis: Redis, postId: string) => {
   const postKey = `post:${postId}`;
-  const post = await redis.hmget(postKey, "title", "content");
+  const post = await redis.hmget(postKey, 'title', 'content');
 
   if (!post) {
     return null;
@@ -17,13 +17,13 @@ const getPostById = async (redis: Redis, postId: string) => {
 
   return {
     id: postId,
-    ...post,
+    ...post
   } as Post;
 };
 
 export const postRouter = router({
   all: publicProcedure.query(async ({ ctx }) => {
-    const postIds = await ctx.redis.smembers("postIds");
+    const postIds = await ctx.redis.smembers('postIds');
     const posts = [];
     for (const postId of postIds) {
       const post = await getPostById(ctx.redis, postId);
@@ -38,7 +38,7 @@ export const postRouter = router({
     .query(async ({ ctx, input }) => {
       const post = await getPostById(ctx.redis, input.id);
       if (!post) {
-        throw new Error("Post not found");
+        throw new Error('Post not found');
       }
       return post;
     }),
@@ -46,21 +46,21 @@ export const postRouter = router({
     .input(
       z.object({
         title: z.string().min(1),
-        content: z.string().min(1),
-      }),
+        content: z.string().min(1)
+      })
     )
     .mutation(async ({ ctx, input }) => {
       const postId = nanoid();
       const postKey = `post:${postId}`;
       await ctx.redis.hmset(postKey, {
         title: input.title,
-        content: input.content,
+        content: input.content
       });
-      await ctx.redis.sadd("postIds", postId);
+      await ctx.redis.sadd('postIds', postId);
 
       const post = {
         id: postId,
-        ...input,
+        ...input
       } as Post;
 
       return post;
@@ -72,13 +72,13 @@ export const postRouter = router({
 
     if (!deleted) {
       throw new TRPCError({
-        code: "NOT_FOUND",
-        message: "Post not found",
-        cause: 'The post with the given "id" does not exist.',
+        code: 'NOT_FOUND',
+        message: 'Post not found',
+        cause: 'The post with the given "id" does not exist.'
       });
     }
-    await ctx.redis.srem("postIds", postId);
+    await ctx.redis.srem('postIds', postId);
 
     return { id: postId };
-  }),
+  })
 });

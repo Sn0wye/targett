@@ -9,15 +9,15 @@
 
 import {
   type SignedInAuthObject,
-  type SignedOutAuthObject,
-} from "@clerk/nextjs/api";
-import { getAuth } from "@clerk/nextjs/server";
-import { TRPCError, initTRPC } from "@trpc/server";
-import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
-import superjson from "superjson";
-import { ZodError } from "zod";
+  type SignedOutAuthObject
+} from '@clerk/nextjs/api';
+import { getAuth } from '@clerk/nextjs/server';
+import { TRPCError, initTRPC } from '@trpc/server';
+import { type CreateNextContextOptions } from '@trpc/server/adapters/next';
+import superjson from 'superjson';
+import { ZodError } from 'zod';
 
-import { redis } from "@targett/db";
+import { redis } from '@targett/db';
 
 /**
  * 1. CONTEXT
@@ -44,7 +44,7 @@ type CreateContextOptions = {
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     auth: opts.auth,
-    redis,
+    redis
   };
 };
 
@@ -56,10 +56,11 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
 export const createTRPCContext = async (opts: CreateNextContextOptions) => {
   const { req } = opts;
 
+  // eslint-disable-next-line @typescript-eslint/await-thenable
   const auth = await getAuth(req);
 
   return createInnerTRPCContext({
-    auth,
+    auth
   });
 };
 
@@ -76,11 +77,10 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
       ...shape,
       data: {
         ...shape.data,
-        zodError:
-          error.cause instanceof ZodError ? error.cause.flatten() : null,
-      },
+        zodError: error.cause instanceof ZodError ? error.cause.flatten() : null
+      }
     };
-  },
+  }
 });
 
 /**
@@ -111,12 +111,12 @@ export const publicProcedure = t.procedure;
  */
 const isAuthed = t.middleware(({ next, ctx }) => {
   if (!ctx.auth.userId) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
   }
   return next({
     ctx: {
-      auth: ctx.auth,
-    },
+      auth: ctx.auth
+    }
   });
 });
 
