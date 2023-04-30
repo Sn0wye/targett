@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, SafeAreaView, View } from "react-native";
+import { useRouter } from "expo-router";
 import { useOAuth } from "@clerk/clerk-expo";
 
 import { useWarmUpBrowser } from "~/hooks/useWarmupBrowser";
@@ -21,27 +22,24 @@ const SignInWithOAuth = () => {
   useWarmUpBrowser();
 
   const { startOAuthFlow } = useOAuth({ strategy: "oauth_github" });
+  const router = useRouter();
 
-  const onPress = async () => {
-    console.log("press");
+  const onPress = React.useCallback(async () => {
     try {
       const { createdSessionId, setActive } = await startOAuthFlow();
 
       if (createdSessionId) {
-        console.log("OAuth session created", createdSessionId);
         setActive && void setActive({ session: createdSessionId });
-        console.log("OAuth session activated", typeof setActive);
-      } else {
-        console.log("OAuth session not created");
+        router.push("/");
       }
     } catch (err) {
       console.error("OAuth error", err);
     }
-  };
+  }, []);
 
   return (
     <View className="rounded-lg border-2 border-gray-500 p-4">
-      <Button title="Sign in GitHub" onPress={() => void onPress} />
+      <Button title="Sign in with GitHub" onPress={() => void onPress()} />
     </View>
   );
 };

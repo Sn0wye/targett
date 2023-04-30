@@ -6,12 +6,16 @@ import { StatusBar } from "expo-status-bar";
 import { ClerkProvider } from "@clerk/clerk-expo";
 
 import { TRPCProvider } from "~/utils/api";
+import { tokenCache } from "~/utils/tokenCache";
 
 // This is the main layout of the app
 // It wraps your pages with the providers they need
 const RootLayout = () => {
   return (
-    <ClerkProvider publishableKey={Constants.expoConfig?.extra?.publishableKey}>
+    <ClerkProvider
+      publishableKey={Constants.expoConfig?.extra?.publishableKey}
+      tokenCache={tokenCache}
+    >
       <TRPCProvider>
         <SafeAreaProvider>
           {/*
