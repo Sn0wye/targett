@@ -1,9 +1,10 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
-import { Stack } from 'expo-router';
+import { Stack, Tabs } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { ClerkProvider } from '@clerk/clerk-expo';
+import { Home } from 'lucide-react-native';
 
 import { TRPCProvider } from '~/utils/api';
 import { tokenCache } from '~/utils/tokenCache';
@@ -18,18 +19,12 @@ const RootLayout = () => {
     >
       <TRPCProvider>
         <SafeAreaProvider>
-          {/*
-          The Stack component displays the current page.
-          It also allows you to configure your screens 
-        */}
           <Stack
             screenOptions={{
-              headerStyle: {
-                backgroundColor: '#f472b6'
-              }
+              headerShown: false
             }}
           />
-          <StatusBar />
+          <StatusBar style='inverted' />
         </SafeAreaProvider>
       </TRPCProvider>
     </ClerkProvider>

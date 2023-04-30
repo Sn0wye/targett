@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Stack, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useAuth, useClerk, useUser } from '@clerk/clerk-expo';
 import { FlashList } from '@shopify/flash-list';
 
@@ -85,7 +85,7 @@ const CreatePost: React.FC = () => {
   );
 };
 
-const Index = () => {
+const Posts = () => {
   const utils = api.useContext();
 
   const postQuery = api.post.all.useQuery();
@@ -97,7 +97,6 @@ const Index = () => {
   return (
     <SafeAreaView className='bg-[#1F104A]'>
       {/* Changes page title visible on the header */}
-      <Stack.Screen options={{ title: 'Home Page' }} />
       <View className='h-full w-full p-4'>
         <Text className='mx-auto pb-2 text-5xl font-bold text-white'>
           Create <Text className='text-pink-400'>T3</Text> Turbo
@@ -135,8 +134,6 @@ const Index = () => {
   );
 };
 
-export default Index;
-
 const AuthShowcase = () => {
   const { isSignedIn } = useAuth();
   const { user } = useUser();
@@ -158,7 +155,7 @@ const AuthShowcase = () => {
       <TouchableOpacity
         className='rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20'
         onPress={
-          isSignedIn ? () => void signOut() : () => router.push('/sign-in')
+          isSignedIn ? () => void signOut() : () => router.push('/login')
         }
       >
         <Text className='text-white'>
@@ -168,3 +165,5 @@ const AuthShowcase = () => {
     </View>
   );
 };
+
+export default Posts;
