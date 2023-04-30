@@ -31,6 +31,8 @@ const defineConfig = (): ExpoConfig => ({
     eas: {
       // projectId: "your-project-id",
     },
+    publishableKey:
+      "pk_test_c21hc2hpbmctdmVydmV0LTkyLmNsZXJrLmFjY291bnRzLmRldiQ",
   },
   plugins: ["./expo-plugins/with-modify-gradle.js"],
 });

@@ -1,5 +1,5 @@
 {
-  "name": "@acme/expo",
+  "name": "@targett/expo",
   "version": "0.1.0",
   "main": "index.tsx",
   "scripts": {
@@ -12,6 +12,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@clerk/clerk-expo": "^0.16.4",
     "@expo/metro-config": "^0.7.1",
     "@shopify/flash-list": "1.4.3",
     "@tanstack/react-query": "^4.29.5",
@@ -19,11 +20,13 @@
     "@trpc/react-query": "^10.20.0",
     "@trpc/server": "^10.20.0",
     "expo": "^48.0.15",
+    "expo-auth-session": "~4.0.3",
     "expo-constants": "~14.2.1",
     "expo-linking": "~4.0.1",
     "expo-router": "^1.5.3",
     "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
+    "expo-web-browser": "~12.1.1",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -33,13 +36,13 @@
     "superjson": "1.9.1"
   },
   "devDependencies": {
-    "@acme/api": "*",
-    "@acme/eslint-config": "*",
-    "@acme/tailwind-config": "*",
     "@babel/core": "^7.21.4",
     "@babel/preset-env": "^7.21.4",
     "@babel/runtime": "^7.21.0",
     "@expo/config-plugins": "^6.0.1",
+    "@targett/api": "*",
+    "@targett/eslint-config": "*",
+    "@targett/tailwind-config": "*",
     "@types/babel__core": "^7.20.0",
     "@types/react": "^18.2.0",
     "@types/webpack-env": "^1.18.0",

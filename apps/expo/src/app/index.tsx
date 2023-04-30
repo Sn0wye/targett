@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Stack, useRouter } from "expo-router";
+import { useAuth, useClerk, useUser } from "@clerk/clerk-expo";
 import { FlashList } from "@shopify/flash-list";
 
 import { api, type RouterOutputs } from "~/utils/api";
@@ -102,6 +103,8 @@ const Index = () => {
           Create <Text className="text-pink-400">T3</Text> Turbo
         </Text>
 
+        <AuthShowcase />
+
         <Button
           onPress={() => void utils.post.all.invalidate()}
           title="Refresh posts"
@@ -133,3 +136,35 @@ const Index = () => {
 };
 
 export default Index;
+
+const AuthShowcase = () => {
+  const { isSignedIn } = useAuth();
+  const { user } = useUser();
+
+  const { data: secretMessage } = api.auth.getSecretMessage.useQuery();
+
+  const { signOut } = useClerk();
+
+  const router = useRouter();
+
+  return (
+    <View className="flex flex-col items-center justify-center gap-4">
+      {user && (
+        <Text className="text-center text-2xl text-white">
+          <Text>Logged in as {user.fullName}</Text>
+          {secretMessage && <Text> - {secretMessage}</Text>}
+        </Text>
+      )}
+      <TouchableOpacity
+        className="rounded-full bg-white/10 px-10 py-3 font-semibold text-white no-underline transition hover:bg-white/20"
+        onPress={
+          isSignedIn ? () => void signOut() : () => router.push("/sign-in")
+        }
+      >
+        <Text className="text-white">
+          {isSignedIn ? "Sign out" : "Sign in"}
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
