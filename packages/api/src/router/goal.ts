@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { type Goal } from '@targett/db';
 
 import { createGoalSchema, goalSchema, updateGoalSchema } from '../schemas';
-import { protectedProcedure, publicProcedure, router } from '../trpc';
+import { protectedProcedure, router } from '../trpc';
 
 const getGoalById = async (redis: Redis, goalId: string) => {
   const goalKey = `goal:${goalId}`;
@@ -30,7 +30,7 @@ export const goalRouter = router({
     return goals.filter(goal => goal !== null) as Goal[];
   }),
 
-  byId: publicProcedure
+  byId: protectedProcedure
     .input(z.object({ id: z.string().min(1) }))
     .query(async ({ ctx, input }) => {
       const goal = await getGoalById(ctx.redis, input.id);
