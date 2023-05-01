@@ -1,0 +1,48 @@
+export const phrases = [
+  'O sucesso não é final, o fracasso não é fatal: é a coragem de continuar que conta.',
+  'Sucesso é a soma de pequenos esforços repetidos dia após dia.',
+  'O sucesso é a capacidade de ir de fracasso em fracasso sem perder o entusiasmo.',
+  'Não existe um caminho para o sucesso. O sucesso é o próprio caminho.',
+  'Sucesso é a habilidade de criar o seu próprio futuro e a coragem de seguir em frente.',
+  'O sucesso não é uma questão de sorte, é uma questão de escolhas.',
+  'O segredo do sucesso é a constância na ação.',
+  'O sucesso é a recompensa da dedicação e da perseverança.',
+  'Não tenha medo de fracassar. Tenha medo de não tentar.',
+  'O sucesso é uma jornada, não um destino.',
+  'A dedicação é a chave para o sucesso.',
+  'O sucesso vem de acreditar em si mesmo e em seus sonhos.',
+  'Sucesso é a soma de oportunidades aproveitadas.',
+  'O sucesso é uma escolha. Escolha ser bem sucedido.',
+  'O sucesso é o resultado da preparação, oportunidade e ação.',
+  'O sucesso é a combinação de determinação e talento.',
+  'O sucesso não é alcançado por acaso, é conquistado com trabalho duro e paixão.',
+  'O sucesso é a capacidade de ir além da zona de conforto.',
+  'O sucesso é uma jornada pessoal, não precisa ser comparado aos outros.',
+  'O sucesso é alcançado com foco, determinação e persistência.',
+  'O sucesso é uma mentalidade, não um destino.',
+  'A mais importante lição que o sucesso ensina é a humildade.',
+  'Não há nada mais motivador do que o sucesso dos outros.',
+  'O sucesso é a capacidade de se levantar cada vez que você cai.',
+  'O sucesso não é a chave para a felicidade. A felicidade é a chave para o sucesso.',
+  'O sucesso vem de pequenos passos diários em direção a seus objetivos.',
+  'Não é o sucesso que define você, mas sim como você se recupera do fracasso.',
+  'O sucesso é a soma de pequenas vitórias conquistadas ao longo do tempo.',
+  'O sucesso é uma jornada, não uma corrida. Aproveite o caminho.',
+  'O sucesso não é algo que você pega, é algo que você atrai ao se tornar a pessoa certa.',
+  'O sucesso é a soma de pequenas ações consistentes em direção a seus objetivos.',
+  'Não há nada mais satisfatório do que alcançar seus objetivos e sonhos.',
+  'O sucesso é o resultado de seguir em frente mesmo quando ninguém mais o faria.',
+  'O sucesso é um caminho de auto-descoberta e autoconhecimento.',
+  'O sucesso é a soma de oportunidades aproveitadas e obstáculos superados.',
+  'O sucesso não é alcançado de uma vez, é resultado de pequenos passos dados com consistência.',
+  'Não há sucesso sem superação, sem enfrentar e vencer obstáculos.',
+  'O sucesso vem de encontrar sua paixão e trabalhar duro todos os dias para alcançá-la.',
+  'O sucesso é a capacidade de ter uma visão clara e seguir em frente, mesmo diante de desafios.',
+  'O sucesso é uma escolha, escolha ser grato e ver a beleza nas pequenas coisas.',
+  'O sucesso vem de superar seus medos e seguir em frente, mesmo diante da incerteza.'
+];
+
+export const pickRandomPhrase = () => {
+  const randomIndex = Math.floor(Math.random() * phrases.length);
+  return phrases[randomIndex];
+};

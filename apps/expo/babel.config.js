@@ -11,7 +11,8 @@ module.exports = function (api) {
     plugins: [
       'nativewind/babel',
       'expo-router/babel',
-      ['module-resolver', { alias: { '~': './src', '@': './assets' } }]
+      ['module-resolver', { alias: { '~': './src', '@': './assets' } }],
+      'react-native-reanimated/plugin'
     ]
   };
 };

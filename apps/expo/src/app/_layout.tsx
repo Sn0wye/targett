@@ -5,7 +5,10 @@ import Constants from 'expo-constants';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { ClerkProvider } from '@clerk/clerk-expo';
+import { NativeBaseProvider } from 'native-base';
 
+import 'react-native-reanimated';
+import 'react-native-gesture-handler';
 import { TRPCProvider } from '~/utils/api';
 import { tokenCache } from '~/utils/tokenCache';
 import { useGoals } from '~/hooks/useGoals';
@@ -32,16 +35,18 @@ const RootLayout = () => {
       tokenCache={tokenCache}
     >
       <TRPCProvider>
-        <SafeAreaProvider>
-          <GestureHandlerRootView className='flex-1' onLayout={onLayoutReady}>
-            <Stack
-              screenOptions={{
-                headerShown: false
-              }}
-            />
-            <StatusBar style='inverted' />
-          </GestureHandlerRootView>
-        </SafeAreaProvider>
+        <NativeBaseProvider>
+          <SafeAreaProvider>
+            <GestureHandlerRootView className='flex-1' onLayout={onLayoutReady}>
+              <Stack
+                screenOptions={{
+                  headerShown: false
+                }}
+              />
+              <StatusBar style='inverted' />
+            </GestureHandlerRootView>
+          </SafeAreaProvider>
+        </NativeBaseProvider>
       </TRPCProvider>
     </ClerkProvider>
   );
