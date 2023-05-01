@@ -33,7 +33,6 @@
   },
   "globalEnv": [
     "CI",
-    "DATABASE_URL",
     "EXPO_ROUTER_APP_ROOT",
     "UPSTASH_REDIS_REST_URL",
     "UPSTASH_REDIS_REST_TOKEN",

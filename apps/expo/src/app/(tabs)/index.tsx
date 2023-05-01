@@ -8,7 +8,7 @@ import { FlashList } from '@shopify/flash-list';
 import { api, type RouterOutputs } from '~/utils/api';
 
 const PostCard: React.FC<{
-  post: RouterOutputs['post']['all'][number];
+  post: RouterOutputs['goal']['all'][number];
   onDelete: () => void;
 }> = ({ post, onDelete }) => {
   const router = useRouter();
@@ -36,11 +36,11 @@ const CreatePost: React.FC = () => {
   const [title, setTitle] = React.useState('');
   const [content, setContent] = React.useState('');
 
-  const { mutate, error } = api.post.create.useMutation({
+  const { mutate, error } = api.goal.create.useMutation({
     async onSuccess() {
       setTitle('');
       setContent('');
-      await utils.post.all.invalidate();
+      await utils.goal.all.invalidate();
     }
   });
 
@@ -88,10 +88,10 @@ const CreatePost: React.FC = () => {
 const Posts = () => {
   const utils = api.useContext();
 
-  const postQuery = api.post.all.useQuery();
+  const postQuery = api.goal.all.useQuery();
 
-  const deletePostMutation = api.post.delete.useMutation({
-    onSettled: () => utils.post.all.invalidate()
+  const deletePostMutation = api.goal.delete.useMutation({
+    onSettled: () => utils.goal.all.invalidate()
   });
 
   return (
@@ -105,7 +105,7 @@ const Posts = () => {
         <AuthShowcase />
 
         <Button
-          onPress={() => void utils.post.all.invalidate()}
+          onPress={() => void utils.goal.all.invalidate()}
           title='Refresh posts'
           color={'#f472b6'}
         />

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Slot, Stack } from 'expo-router';
+import { Stack } from 'expo-router';
 
 const AuthLayout = () => {
   return (

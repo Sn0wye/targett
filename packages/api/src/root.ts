@@ -1,9 +1,9 @@
 import { authRouter } from './router/auth';
-import { postRouter } from './router/post';
+import { goalRouter } from './router/goal';
 import { router } from './trpc';
 
 export const appRouter = router({
-  post: postRouter,
+  goal: goalRouter,
   auth: authRouter
 });
 
