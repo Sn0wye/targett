@@ -5,22 +5,10 @@ import { z } from 'zod';
 
 import { type Goal } from '@targett/db';
 
-import { createGoalSchema, updateGoalSchema } from '../schemas';
-import { publicProcedure, router } from '../trpc';
+import { createGoalSchema, goalSchema, updateGoalSchema } from '../schemas';
+import { protectedProcedure, publicProcedure, router } from '../trpc';
 
-const goalParser = z.object({
-  id: z.string(),
-  name: z.string(),
-  total: z.coerce.number(),
-  current: z.coerce.number(),
-  createdAt: z.coerce.date(),
-  updatedAt: z.coerce.date()
-});
-
-const getGoalById = async (
-  redis: Redis,
-  goalId: string
-): Promise<Goal | null> => {
+const getGoalById = async (redis: Redis, goalId: string) => {
   const goalKey = `goal:${goalId}`;
   const goal = await redis.hgetall<Goal>(goalKey);
 
@@ -28,12 +16,14 @@ const getGoalById = async (
     return null;
   }
 
-  return goalParser.parse(goal);
+  return goalSchema.parse(goal);
 };
 
 export const goalRouter = router({
-  all: publicProcedure.query(async ({ ctx }) => {
-    const goalIds = await ctx.redis.smembers('goalId');
+  all: protectedProcedure.query(async ({ ctx }) => {
+    const userGoalsKey = `${ctx.auth.userId}:goalKeys`;
+    const goalIds = await ctx.redis.smembers(userGoalsKey);
+
     const goals = await Promise.all(
       goalIds.map(goalId => getGoalById(ctx.redis, goalId))
     );
@@ -45,32 +35,32 @@ export const goalRouter = router({
     .query(async ({ ctx, input }) => {
       const goal = await getGoalById(ctx.redis, input.id);
       if (!goal) {
-        throw new Error('Goal not found');
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: `The goal with the id ${input.id} does not exist.`
+        });
       }
       return goal;
     }),
-  create: publicProcedure
+  create: protectedProcedure
     .input(createGoalSchema)
     .mutation(async ({ ctx, input }) => {
-      const {
-        id,
-        createdAt = new Date(),
-        updatedAt = new Date(),
-        ...data
-      } = input;
-      const goalId = id ?? nanoid();
+      const goalId = input.id ?? nanoid();
       const goalKey = `goal:${goalId}`;
+      const userGoalsKey = `${ctx.auth.userId}:goalKeys`;
 
-      const goal = { ...data, id: goalId, createdAt, updatedAt } satisfies Goal;
+      const goal = { ...input, id: goalId } satisfies Goal;
 
       Promise.all([
+        // Create goal
         await ctx.redis.hmset(goalKey, goal),
-        await ctx.redis.sadd('goalKeys', goalId)
+        // Add goal to user's goals
+        await ctx.redis.sadd(userGoalsKey, goalId)
       ]);
 
       return goal;
     }),
-  update: publicProcedure
+  update: protectedProcedure
     .input(updateGoalSchema)
     .mutation(async ({ ctx, input }) => {
       const goalId = input.id;
@@ -95,25 +85,29 @@ export const goalRouter = router({
 
       return updatedGoal;
     }),
-  delete: publicProcedure
+  delete: protectedProcedure
     .input(
       z.object({
         id: z.string().min(1)
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const goalId = input;
+      const goalId = input.id;
       const goalKey = `goal:${goalId}`;
+      const userGoalsKey = `${ctx.auth.userId}:goalKeys`;
+
+      // Delete goal
       const deleted = await ctx.redis.del(goalKey);
 
       if (!deleted) {
         throw new TRPCError({
           code: 'NOT_FOUND',
-          message: 'Goal not found',
-          cause: 'The goal with the given "id" does not exist.'
+          message: `The goal with the "id" = ${goalId} does not exist.`
         });
       }
-      await ctx.redis.srem('goalIds', goalId);
+
+      // Remove goal from user's goals
+      await ctx.redis.srem(userGoalsKey, goalId);
 
       return { id: goalId };
     })
