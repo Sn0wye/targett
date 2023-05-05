@@ -17,17 +17,17 @@ import { useGoals } from '~/hooks/useGoals';
 // It wraps your pages with the providers they need
 const RootLayout = () => {
   const { getGoals } = useGoals();
-  const [appIsReady, setAppIsReady] = React.useState(false);
+  const [isReady, setIsReady] = React.useState(false);
 
   React.useEffect(() => {
-    getGoals().then(() => setAppIsReady(true));
+    getGoals().then(() => setIsReady(true));
   }, [getGoals]);
 
   const onLayoutReady = React.useCallback(async () => {
-    if (appIsReady) {
+    if (isReady) {
       await SplashScreen.hideAsync();
     }
-  }, [appIsReady]);
+  }, [isReady]);
 
   return (
     <ClerkProvider
@@ -38,12 +38,13 @@ const RootLayout = () => {
         <NativeBaseProvider>
           <SafeAreaProvider>
             <GestureHandlerRootView className='flex-1' onLayout={onLayoutReady}>
+              {!isReady && <SplashScreen />}
               <Stack
                 screenOptions={{
                   headerShown: false
                 }}
               />
-              <StatusBar style='inverted' />
+              <StatusBar style='light' />
             </GestureHandlerRootView>
           </SafeAreaProvider>
         </NativeBaseProvider>

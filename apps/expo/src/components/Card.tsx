@@ -34,7 +34,7 @@ export const Card = ({ goal }: CardProps) => {
   const updateXThreshold = gestureThreshold; // Swipe right to update
 
   const translateX = useSharedValue(0);
-  const marginTop = useSharedValue(8);
+  const marginTop = useSharedValue(0);
   const itemHeight = useSharedValue(200);
   const iconOpacity = useSharedValue(1);
 

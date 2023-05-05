@@ -21,6 +21,7 @@
     "@trpc/client": "^10.20.0",
     "@trpc/react-query": "^10.20.0",
     "@trpc/server": "^10.20.0",
+    "clsx": "^1.2.1",
     "expo": "^48.0.15",
     "expo-auth-session": "~4.0.3",
     "expo-constants": "~14.2.1",
@@ -46,6 +47,7 @@
     "react-native-screens": "~3.20.0",
     "react-native-svg": "13.4.0",
     "superjson": "1.9.1",
+    "tailwind-merge": "^1.12.0",
     "zod": "^3.21.4",
     "zustand": "^4.3.7"
   },

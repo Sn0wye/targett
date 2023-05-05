@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { useAuth, useClerk, useUser } from '@clerk/clerk-expo';
 import { FlashList } from '@shopify/flash-list';
 
 import { api } from '~/utils/api';
+import { cn } from '~/utils/cn';
 import { Card } from '~/components/Card';
 import { Header } from '~/components/Header';
 import { NewGoalModal } from '~/components/NewGoalModal';
@@ -31,13 +32,17 @@ const Home = () => {
             keyExtractor={goal => goal.id}
             renderItem={({ item }) => <Card goal={item} />}
             estimatedItemSize={154}
+            ItemSeparatorComponent={() => <View className='h-2' />}
           />
         ) : (
           <NoGoals onCreate={toggleNewGoalModal} />
         )}
         {goals && goals.length > 0 && (
           <TouchableOpacity
-            className='absolute -bottom-4 right-0 h-12 w-12 items-center justify-center rounded-lg bg-gray-800'
+            className={cn(
+              'absolute right-0 h-12 w-12 items-center justify-center rounded-lg bg-orange-500',
+              Platform.OS === 'android' ? 'bottom-4' : '-bottom-4'
+            )}
             onPress={toggleNewGoalModal}
           >
             <Text className='text-4xl text-white'>+</Text>
