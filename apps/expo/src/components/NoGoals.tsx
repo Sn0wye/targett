@@ -1,5 +1,6 @@
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Plus } from 'lucide-react-native';
 
 type NoGoalsProps = {
   onCreate: () => void;
@@ -7,15 +8,18 @@ type NoGoalsProps = {
 
 export const NoGoals = ({ onCreate }: NoGoalsProps) => {
   return (
-    <View className='flex-1 items-center'>
-      <Text className='px-3 text-center text-3xl text-white'>
+    <View className='flex-1 items-center justify-center'>
+      <Text className='text-center text-3xl text-white'>
         Parece que você ainda não tem nenhuma meta :(
       </Text>
       <TouchableOpacity
-        className='mt-4 rounded-md bg-gray-800 p-2'
+        className='mt-8 flex-row items-center rounded-md bg-orange-500 p-4'
         onPress={onCreate}
       >
-        <Text className='text-center text-3xl text-white'>Crie uma</Text>
+        <Plus className='mr-1 text-white' size={24} strokeWidth={3} />
+        <Text className='text-center text-2xl font-semibold uppercase tracking-tighter text-white'>
+          Adicionar
+        </Text>
       </TouchableOpacity>
     </View>
   );
