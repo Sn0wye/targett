@@ -2,20 +2,14 @@
   "$schema": "https://turborepo.org/schema.json",
   "globalDependencies": ["**/.env"],
   "pipeline": {
-    "db:generate": {
-      "inputs": ["prisma/schema.prisma"],
-      "cache": false
-    },
-    "db:push": {
-      "inputs": ["prisma/schema.prisma"],
-      "cache": false
-    },
+    "db:generate": {},
+    "db:migrate": {},
     "dev": {
       "persistent": true,
       "cache": false
     },
     "build": {
-      "dependsOn": ["^build", "^db:generate"],
+      "dependsOn": ["^build"],
       "outputs": [".next/**", ".expo/**"]
     },
     "lint": {},
@@ -34,11 +28,11 @@
   "globalEnv": [
     "CI",
     "EXPO_ROUTER_APP_ROOT",
-    "UPSTASH_REDIS_REST_URL",
-    "UPSTASH_REDIS_REST_TOKEN",
     "NODE_ENV",
     "SKIP_ENV_VALIDATION",
     "VERCEL",
-    "VERCEL_URL"
+    "VERCEL_URL",
+    "DATABASE_URL",
+    "DATABASE_AUTH_TOKEN"
   ]
 }

@@ -6,13 +6,19 @@
   "license": "MIT",
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
-    "with-env": "dotenv -e ../../.env --"
+    "with-env": "dotenv -e ../../.env --",
+    "db:generate": "drizzle-kit generate:sqlite",
+    "db:migrate": "pnpm with-env tsx migrate.ts"
   },
   "devDependencies": {
     "dotenv-cli": "^7.2.1",
+    "drizzle-kit": "^0.17.6",
+    "tsx": "^3.12.7",
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@upstash/redis": "^1.20.4"
+    "@libsql/client": "^0.1.6",
+    "drizzle-orm": "^0.25.4",
+    "drizzle-zod": "^0.4.1"
   }
 }

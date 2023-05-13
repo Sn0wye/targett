@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.16.4",
-    "@targett/db": "^0.1.0",
+    "@targett/db": "*",
     "@trpc/client": "^10.20.0",
     "@trpc/server": "^10.20.0",
     "nanoid": "^4.0.2",
@@ -20,7 +20,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@targett/eslint-config": "^0.1.0",
+    "@targett/eslint-config": "*",
     "eslint": "^8.38.0",
     "typescript": "^5.0.4"
   }

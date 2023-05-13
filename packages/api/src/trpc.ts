@@ -17,7 +17,7 @@ import { type CreateNextContextOptions } from '@trpc/server/adapters/next';
 import superjson from 'superjson';
 import { ZodError } from 'zod';
 
-import { redis } from '@targett/db';
+import { db } from '@targett/db';
 
 /**
  * 1. CONTEXT
@@ -44,7 +44,7 @@ type CreateContextOptions = {
 const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     auth: opts.auth,
-    redis
+    db
   };
 };
 
@@ -56,7 +56,6 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
 export const createTRPCContext = async (opts: CreateNextContextOptions) => {
   const { req } = opts;
 
-  // eslint-disable-next-line @typescript-eslint/await-thenable
   const auth = await getAuth(req);
 
   return createInnerTRPCContext({

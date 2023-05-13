@@ -7,10 +7,9 @@ export const env = createEnv({
    * built with invalid env vars.
    */
   server: {
-    DATABASE_URL: z.string().url(),
     NODE_ENV: z.enum(['development', 'test', 'production']),
-    UPSTASH_REDIS_REST_URL: z.string().url(),
-    UPSTASH_REDIS_REST_TOKEN: z.string().min(1)
+    DATABASE_URL: z.string().url().min(1),
+    DATABASE_AUTH_TOKEN: z.string().min(1)
     // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
   },
   /**
@@ -24,10 +23,9 @@ export const env = createEnv({
    * Destructure all variables from `process.env` to make sure they aren't tree-shaken away.
    */
   runtimeEnv: {
-    DATABASE_URL: process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
-    UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL,
-    UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN
+    DATABASE_URL: process.env.DATABASE_URL,
+    DATABASE_AUTH_TOKEN: process.env.DATABASE_AUTH_TOKEN
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   }
 });
