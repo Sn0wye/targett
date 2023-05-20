@@ -171,9 +171,6 @@ importers:
       '@targett/eslint-config':
         specifier: '*'
         version: link:../../packages/config/eslint
-      '@targett/redis':
-        specifier: '*'
-        version: link:../../packages/redis
       '@targett/tailwind-config':
         specifier: '*'
         version: link:../../packages/config/tailwind
@@ -207,6 +204,9 @@ importers:
       '@clerk/nextjs':
         specifier: ^4.16.4
         version: 4.16.4(next@13.3.1)(react-dom@18.2.0)(react@18.2.0)
+      '@radix-ui/react-slot':
+        specifier: ^1.0.1
+        version: 1.0.1(react@18.2.0)
       '@t3-oss/env-nextjs':
         specifier: ^0.2.1
         version: 0.2.1(zod@3.21.4)
@@ -216,9 +216,9 @@ importers:
       '@targett/api':
         specifier: '*'
         version: link:../../packages/api
-      '@targett/redis':
+      '@targett/db':
         specifier: '*'
-        version: link:../../packages/redis
+        version: link:../../packages/db
       '@targett/tailwind-config':
         specifier: '*'
         version: link:../../packages/config/tailwind
@@ -234,6 +234,15 @@ importers:
       '@trpc/server':
         specifier: ^10.20.0
         version: 10.20.0
+      class-variance-authority:
+        specifier: ^0.6.0
+        version: 0.6.0(typescript@5.0.4)
+      clsx:
+        specifier: ^1.2.1
+        version: 1.2.1
+      lucide-react:
+        specifier: ^0.220.0
+        version: 0.220.0(react@18.2.0)
       next:
         specifier: ^13.3.1
         version: 13.3.1(@babel/core@7.21.5)(react-dom@18.2.0)(react@18.2.0)
@@ -246,6 +255,12 @@ importers:
       superjson:
         specifier: 1.9.1
         version: 1.9.1
+      tailwind-merge:
+        specifier: ^1.12.0
+        version: 1.12.0
+      tailwindcss-animate:
+        specifier: ^1.0.5
+        version: 1.0.5(tailwindcss@3.3.2)
       zod:
         specifier: ^3.21.4
         version: 3.21.4
@@ -292,9 +307,6 @@ importers:
       '@targett/db':
         specifier: '*'
         version: link:../db
-      '@targett/redis':
-        specifier: '*'
-        version: link:../redis
       '@trpc/client':
         specifier: ^10.20.0
         version: 10.20.0(@trpc/server@10.20.0)
@@ -385,19 +397,6 @@ importers:
       tsx:
         specifier: ^3.12.7
         version: 3.12.7
-      typescript:
-        specifier: ^5.0.4
-        version: 5.0.4
-
-  packages/redis:
-    dependencies:
-      '@upstash/redis':
-        specifier: ^1.20.4
-        version: 1.20.4
-    devDependencies:
-      dotenv-cli:
-        specifier: ^7.2.1
-        version: 7.2.1
       typescript:
         specifier: ^5.0.4
         version: 5.0.4
@@ -6118,14 +6117,6 @@ packages:
       '@typescript-eslint/types': 5.59.1
       eslint-visitor-keys: 3.4.0
 
-  /@upstash/redis@1.20.4:
-    resolution: {integrity: sha512-U7j7py+yPvafB5KS7o+F19j2CWzZCwmQ4Tvs+n2lpCWuw/8CeFtWrFWPtQa5dgrVu6tu+Ki9DmhDiAbgMS5fGA==}
-    dependencies:
-      isomorphic-fetch: 3.0.0
-    transitivePeerDependencies:
-      - encoding
-    dev: false
-
   /@urql/core@2.3.6(graphql@15.8.0):
     resolution: {integrity: sha512-PUxhtBh7/8167HJK6WqBv6Z0piuiaZHQGYbhwpNL9aIQmLROPEdaUYkY4wh45wPQXcTpnd11l0q3Pw+TI11pdw==}
     peerDependencies:
@@ -7072,6 +7063,18 @@ packages:
       define-property: 0.2.5
       isobject: 3.0.1
       static-extend: 0.1.2
+    dev: false
+
+  /class-variance-authority@0.6.0(typescript@5.0.4):
+    resolution: {integrity: sha512-qdRDgfjx3GRb9fpwpSvn+YaidnT7IUJNe4wt5/SWwM+PmUwJUhQRk/8zAyNro0PmVfmen2635UboTjIBXXxy5A==}
+    peerDependencies:
+      typescript: '>= 4.5.5 < 6'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+    dependencies:
+      clsx: 1.2.1
+      typescript: 5.0.4
     dev: false
 
   /clean-stack@2.2.0:
@@ -10211,15 +10214,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: false
 
-  /isomorphic-fetch@3.0.0:
-    resolution: {integrity: sha512-qvUtwJ3j6qwsF3jLxkZ72qCgjMysPzDfeV240JHiGZsANBYd+EEuu35v7dfrJ9Up0Ak07D7GGSkGhCHTqg/5wA==}
-    dependencies:
-      node-fetch: 2.6.9
-      whatwg-fetch: 3.6.2
-    transitivePeerDependencies:
-      - encoding
-    dev: false
-
   /javascript-natural-sort@0.7.1:
     resolution: {integrity: sha512-nO6jcEfZWQXDhOiBtG2KvKyEptz7RVbpGP4vTD2hLBdmNQSsCiicO2Ioinv6UI4y9ukqnBpy+XZ9H6uLNgJTlw==}
     dev: false
@@ -10723,6 +10717,14 @@ packages:
       react: 18.2.0
       react-native: 0.71.7(@babel/core@7.21.4)(@babel/preset-env@7.21.4)(react@18.2.0)
       react-native-svg: 13.4.0(react-native@0.71.7)(react@18.2.0)
+    dev: false
+
+  /lucide-react@0.220.0(react@18.2.0):
+    resolution: {integrity: sha512-bYtGUsLAWBvZu+BzAU/ziP1gzE4LwMEXLnlgSr1yUKEPPalLG77JLd5GdYebOVkpm+GtqRqnp6tEKDX7Bm8ZlQ==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /make-dir@2.1.0:
@@ -14012,6 +14014,14 @@ packages:
 
   /tailwind-merge@1.12.0:
     resolution: {integrity: sha512-Y17eDp7FtN1+JJ4OY0Bqv9OA41O+MS8c1Iyr3T6JFLnOgLg3EvcyMKZAnQ8AGyvB5Nxm3t9Xb5Mhe139m8QT/g==}
+    dev: false
+
+  /tailwindcss-animate@1.0.5(tailwindcss@3.3.2):
+    resolution: {integrity: sha512-UU3qrOJ4lFQABY+MVADmBm+0KW3xZyhMdRvejwtXqYOL7YjHYxmuREFAZdmVG5LPe5E9CAst846SLC4j5I3dcw==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
+      tailwindcss: 3.3.2
     dev: false
 
   /tailwindcss@3.3.2:

@@ -11,7 +11,11 @@ const config = {
   transpilePackages: ['@targett/api', '@targett/db'],
   /** We already do linting and typechecking as separate tasks in CI */
   eslint: { ignoreDuringBuilds: !!process.env.CI },
-  typescript: { ignoreBuildErrors: !!process.env.CI }
+  typescript: { ignoreBuildErrors: !!process.env.CI },
+  experimental: {
+    appDir: true,
+    serverComponentsExternalPackages: ['better-sqlite3']
+  }
 };
 
 export default config;

@@ -5,7 +5,7 @@ export default withClerkMiddleware((_req: NextRequest) => {
   return NextResponse.next();
 });
 
-// Stop Middleware running on static files
+// Stop Middleware running on static files and public folder
 export const config = {
   matcher: [
     /*
@@ -13,8 +13,10 @@ export const config = {
      * - _next
      * - static (static files)
      * - favicon.ico (favicon file)
+     * - public folder
+     * - public folder
      */
-    '/(.*?trpc.*?|(?!static|.*\\..*|_next|favicon.ico).*)',
+    '/((?!static|.*\\..*|_next|favicon.ico).*)',
     '/'
   ]
 };
