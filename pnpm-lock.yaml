@@ -240,6 +240,9 @@ importers:
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
+      framer-motion:
+        specifier: ^10.12.12
+        version: 10.12.12(react-dom@18.2.0)(react@18.2.0)
       lucide-react:
         specifier: ^0.220.0
         version: 0.220.0(react@18.2.0)
@@ -9265,6 +9268,24 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       map-cache: 0.2.2
+    dev: false
+
+  /framer-motion@10.12.12(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-DDCqp60U6hR7aUrXj/BXc/t0Sd/U4ep6w/NZQkw898K+u7s+Vv/P8yxq4WTNA86kU9QCsqOgn1Qhz2DpYK0Oag==}
+    peerDependencies:
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      tslib: 2.5.0
+    optionalDependencies:
+      '@emotion/is-prop-valid': 0.8.8
     dev: false
 
   /framer-motion@6.5.1(react-dom@18.2.0)(react@18.2.0):

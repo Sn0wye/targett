@@ -5,5 +5,12 @@ import { useClerk } from '@clerk/nextjs/app-beta/client';
 export const CustomSignIn = () => {
   const { openSignIn } = useClerk();
 
-  return <button onClick={() => openSignIn()}>Sign In</button>;
+  return (
+    <button
+      onClick={() => openSignIn()}
+      className='rounded-md bg-orange-500 px-3 py-2 transition-colors hover:bg-orange-600'
+    >
+      Sign In
+    </button>
+  );
 };

@@ -35,11 +35,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body
           className={cn(
             inter.variable,
-            'text-foreground flex flex-col bg-gray-900 font-sans'
+            'text-foreground flex flex-col bg-zinc-900 font-sans'
           )}
         >
           <Header />
-          <div className='container'>{children}</div>
+          <div className='mx-auto w-full max-w-[1200px]'>{children}</div>
         </body>
       </html>
     </ClerkProvider>
