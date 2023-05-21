@@ -12,3 +12,4 @@ export const db = drizzle(sqlite);
 
 export * from './schema';
 export * from 'drizzle-orm';
+export * from 'drizzle-orm/libsql';

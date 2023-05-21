@@ -1,50 +1,31 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-import { eq, goals } from '@targett/db';
-import {
-  createGoalSchema,
-  goalSchema,
-  updateGoalSchema,
-  type Goal,
-  type ParsedGoal
-} from '@targett/db/schemas';
+import { createGoalSchema, updateGoalSchema } from '@targett/db/schemas';
 
 import { protectedProcedure, router } from '../trpc';
-
-const parseGoals = (goals: Goal[]): ParsedGoal[] => {
-  return goals.map(goal => goalSchema.parse(goal));
-};
+import { GoalService } from './services/GoalService';
 
 export const goalRouter = router({
-  all: protectedProcedure.query(async ({ ctx }) => {
-    const allGoals = await ctx.db
-      .select()
-      .from(goals)
-      .where(eq(goals.userId, ctx.auth.userId))
-      .all();
-
-    return parseGoals(allGoals);
+  all: protectedProcedure.query(({ ctx }) => {
+    const goalService = new GoalService(ctx.db);
+    return goalService.all(ctx.auth.userId);
   }),
 
   byId: protectedProcedure
     .input(z.object({ id: z.string().min(1) }))
     .query(async ({ ctx, input }) => {
-      const goal = await ctx.db
-        .select()
-        .from(goals)
-        .where(eq(goals.id, input.id))
-        .get();
+      const goalService = new GoalService(ctx.db);
 
-      if (!goal) {
+      try {
+        return await goalService.byId(input.id);
+      } catch {
         throw new TRPCError({
           code: 'NOT_FOUND',
           message: 'Goal not found',
           cause: 'The goal with the given "id" does not exist.'
         });
       }
-
-      return goalSchema.parse(goal);
     }),
   create: protectedProcedure
     .input(
@@ -53,41 +34,28 @@ export const goalRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const insertedGoal = await ctx.db
-        .insert(goals)
-        .values({
-          ...input,
-          userId: ctx.auth.userId
-        })
-        .returning()
-        .get();
-
-      return goalSchema.parse(insertedGoal);
+      const goalService = new GoalService(ctx.db);
+      return goalService.create({
+        ...input,
+        userId: ctx.auth.userId
+      });
     }),
   update: protectedProcedure
     .input(updateGoalSchema)
     .mutation(async ({ ctx, input }) => {
       const { updatedAt = new Date().toISOString() } = input;
 
-      const updatedGoal = await ctx.db
-        .update(goals)
-        .set({
-          ...input,
-          updatedAt
-        })
-        .where(eq(goals.id, input.id))
-        .returning()
-        .get();
+      const goalService = new GoalService(ctx.db);
 
-      if (!updatedGoal) {
+      try {
+        return await goalService.update({ ...input, updatedAt });
+      } catch {
         throw new TRPCError({
           code: 'NOT_FOUND',
           message: 'Goal not found',
           cause: 'The goal with the given "id" does not exist.'
         });
       }
-
-      return goalSchema.parse(updatedGoal);
     }),
   delete: protectedProcedure
     .input(
@@ -96,20 +64,16 @@ export const goalRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const deletedGoal = await ctx.db
-        .delete(goals)
-        .where(eq(goals.id, input.id))
-        .returning()
-        .get();
+      const goalService = new GoalService(ctx.db);
 
-      if (!deletedGoal) {
+      try {
+        return await goalService.byId(input.id);
+      } catch {
         throw new TRPCError({
           code: 'NOT_FOUND',
           message: 'Goal not found',
           cause: 'The goal with the given "id" does not exist.'
         });
       }
-
-      return goalSchema.parse(deletedGoal);
     })
 });
