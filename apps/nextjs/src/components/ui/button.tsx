@@ -4,12 +4,15 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '~/lib/utils';
 
+//TODO: add secondary and destructive variants
+
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background',
+  'flex items-center rounded-md text-sm border font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-100 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background',
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        default:
+          'bg-zinc-100 text-black hover:bg-zinc-950 hover:text-zinc-100 border-zinc-100',
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline:
@@ -20,7 +23,7 @@ const buttonVariants = cva(
         link: 'underline-offset-4 hover:underline text-primary'
       },
       size: {
-        default: 'h-10 py-2 px-4',
+        default: 'h-10 px-3',
         sm: 'h-9 px-3 rounded-md',
         lg: 'h-11 px-8 rounded-md'
       }
