@@ -32,6 +32,9 @@ export const createGoalSchema = createInsertSchema(goals, {
     .transform(date => date.toISOString())
 });
 
+export type CreateGoalInput = z.input<typeof createGoalSchema>;
+export type CreateGoalOutput = z.output<typeof createGoalSchema>;
+
 export const updateGoalSchema = createGoalSchema
   .partial()
   .extend({
@@ -41,6 +44,11 @@ export const updateGoalSchema = createGoalSchema
     createdAt: true
   });
 
+export type UpdateGoalInput = z.input<typeof updateGoalSchema>;
+export type UpdateGoalOutput = z.output<typeof updateGoalSchema>;
+
 export const deleteGoalSchema = z.object({
   id: z.string().min(1)
 });
+
+export type DeleteGoalInput = z.input<typeof deleteGoalSchema>;
