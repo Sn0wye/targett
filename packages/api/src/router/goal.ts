@@ -67,7 +67,7 @@ export const goalRouter = router({
       const goalService = new GoalService(ctx.db);
 
       try {
-        return await goalService.byId(input.id);
+        return await goalService.delete(input.id);
       } catch {
         throw new TRPCError({
           code: 'NOT_FOUND',
