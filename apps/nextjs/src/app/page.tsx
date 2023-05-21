@@ -1,20 +1,12 @@
-import React from 'react';
-import { currentUser } from '@clerk/nextjs/app-beta';
+import { GoalCards } from '~/components/goal-cards';
+import { HomeActions } from '~/components/home-actions';
 
-import { CustomSignIn } from './signin';
-import { CustomSignOut } from './signout';
-
-const Protected = async () => {
-  const self = await currentUser();
-
+const DashboardPage = () => {
   return (
-    <div className='font-sans'>
-      <p>Hello World!</p>
-      <div className='bg-rd-500'>
-        {self && <CustomSignOut />}
-        {!self && <CustomSignIn />}
-      </div>
+    <div className='flex flex-col gap-6 pb-12 pt-6'>
+      <HomeActions />
+      <GoalCards />
     </div>
   );
 };
-export default Protected;
+export default DashboardPage;
