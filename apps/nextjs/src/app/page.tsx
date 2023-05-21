@@ -17,5 +17,4 @@ const Protected = async () => {
     </div>
   );
 };
-
 export default Protected;

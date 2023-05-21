@@ -18,11 +18,6 @@ export const Header = () => {
         id: 'home',
         label: 'Dashboard',
         href: '/'
-      },
-      {
-        id: 'protected',
-        label: 'Protected',
-        href: '/protected'
       }
     ],
     initialTabId: pathname ?? 'home'

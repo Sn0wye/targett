@@ -6,23 +6,12 @@ import { ClerkProvider } from '@clerk/nextjs/app-beta';
 
 import { Header } from '~/components/header';
 import { cn } from '~/lib/utils';
+import { siteMeta } from '../config/metadata';
+import { Analytics } from './analytics';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
-export const metadata: Metadata = {
-  title: {
-    default: 'targett',
-    template: `%s - targett`
-  },
-  description: 'targett',
-  authors: [
-    {
-      name: 'Gabriel Trzimajewski',
-      url: 'https://snowye.dev'
-    }
-  ],
-  creator: 'Gabriel Trzimajewski'
-};
+export const metadata: Metadata = siteMeta;
 
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -30,18 +19,22 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <ClerkProvider>
+    <>
       <html lang='en'>
         <body
+          suppressHydrationWarning={true}
           className={cn(
             inter.variable,
-            'text-foreground flex flex-col bg-zinc-900 font-sans'
+            'text-foreground flex flex-col bg-zinc-900 font-sans antialiased'
           )}
         >
-          <Header />
-          <div className='mx-auto w-full max-w-[1200px]'>{children}</div>
+          <ClerkProvider>
+            <Header />
+            <div className='mx-auto w-full max-w-[1200px]'>{children}</div>
+          </ClerkProvider>
+          <Analytics />
         </body>
       </html>
-    </ClerkProvider>
+    </>
   );
 }
