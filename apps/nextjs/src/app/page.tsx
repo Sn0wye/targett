@@ -1,6 +1,6 @@
 import { currentUser } from '@clerk/nextjs/app-beta';
 
-import { GoalService } from '@targett/api/src/router/services/GoalService';
+import { GoalService } from '@targett/api/services';
 import { db } from '@targett/db';
 import { type ParsedGoal } from '@targett/db/schemas';
 
