@@ -12,13 +12,13 @@
   },
   "devDependencies": {
     "dotenv-cli": "^7.2.1",
-    "drizzle-kit": "^0.17.6",
+    "drizzle-kit": "^0.18.1",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4"
   },
   "dependencies": {
     "@libsql/client": "^0.1.6",
-    "drizzle-orm": "^0.25.4",
+    "drizzle-orm": "^0.26.3",
     "drizzle-zod": "^0.4.1"
   }
 }
