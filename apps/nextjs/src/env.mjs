@@ -12,6 +12,7 @@ export const env = createEnv({
     DATABASE_AUTH_TOKEN: z.string().min(1)
     // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
   },
+  skipValidation: !!process.env.CI,
   /**
    * Specify your client-side environment variables schema here.
    * For them to be exposed to the client, prefix them with `NEXT_PUBLIC_`.
