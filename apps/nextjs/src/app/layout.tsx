@@ -8,6 +8,7 @@ import { Header } from '~/components/header';
 import { cn } from '~/lib/utils';
 import { siteMeta } from '../config/metadata';
 import { Analytics } from './analytics';
+import { Providers } from './providers';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -19,22 +20,23 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <>
-      <html lang='en'>
-        <body
-          suppressHydrationWarning={true}
-          className={cn(
-            inter.variable,
-            'text-foreground flex flex-col bg-zinc-900 font-sans antialiased'
-          )}
-        >
-          <ClerkProvider>
+    <Providers>
+      {/* Clerk Provider is here because it needs the `fs` node module */}
+      <ClerkProvider>
+        <html lang='en'>
+          <body
+            suppressHydrationWarning
+            className={cn(
+              inter.variable,
+              'text-foreground flex flex-col bg-zinc-900 font-sans antialiased'
+            )}
+          >
             <Header />
             <div className='mx-auto w-full max-w-[1200px]'>{children}</div>
-          </ClerkProvider>
+          </body>
           <Analytics />
-        </body>
-      </html>
-    </>
+        </html>
+      </ClerkProvider>
+    </Providers>
   );
 }
