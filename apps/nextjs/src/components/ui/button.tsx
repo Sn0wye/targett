@@ -14,14 +14,12 @@ const buttonVariants = cva(
       variant: {
         default:
           'bg-zinc-100 text-black hover:bg-zinc-950 hover:text-zinc-100 border-zinc-100',
-        destructive:
-          'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         outline:
-          'bg-zinc-950 text-zinc-400 border border-zinc-800 hover:text-zinc-100 hover:border-zinc-100 active:bg-zinc-800',
-        secondary:
-          'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
-        link: 'underline-offset-4 hover:underline text-primary'
+          'bg-zinc-950 text-zinc-400 border border-accent-200 hover:text-zinc-100 hover:border-zinc-100 active:bg-zinc-800',
+        destructive: 'bg-red-900 text-red-50 hover:bg-red-900/90',
+        secondary: 'bg-zinc-800 text-zinc-50 hover:bg-zinc-800/80',
+        ghost: 'hover:bg-zinc-800 hover:text-zinc-50',
+        link: 'text-zinc-50 underline-offset-4 hover:underline'
       },
       size: {
         default: 'h-10 px-3',
