@@ -1,9 +1,14 @@
-import React from 'react';
+'use client';
+
+import { useState } from 'react';
 import { CalendarDays } from 'lucide-react';
+import { useZact } from 'zact/client';
 
 import { type ParsedGoal } from '@targett/db/schemas';
 
+import { deleteGoalAction } from '~/actions/delete-goal';
 import { Button } from './ui/button';
+import { ConfirmDialog } from './ui/confirm-dialog';
 import {
   Sheet,
   SheetContent,
@@ -33,8 +38,18 @@ type GoalCardProps = {
 };
 
 const GoalCard = ({ goal }: GoalCardProps) => {
+  const [open, onOpenChange] = useState(false);
+  const { mutate, isLoading } = useZact(deleteGoalAction);
+
+  const onDelete = async () => {
+    await mutate({
+      id: goal.id
+    });
+    onOpenChange(false);
+  };
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
         <div
           key={goal.id}
@@ -60,9 +75,20 @@ const GoalCard = ({ goal }: GoalCardProps) => {
           </SheetDescription> */}
         </SheetHeader>
         <SheetFooter>
-          <Button variant='destructive' className='w-full justify-center'>
-            Delete
-          </Button>
+          <ConfirmDialog
+            title='Delete Goal'
+            description='The goal will be permanently deleted. This action cannot be undone.'
+            isLoading={isLoading}
+            onConfirm={() => onDelete()}
+          >
+            <Button
+              variant='destructive'
+              className='w-full justify-center'
+              isLoading={isLoading}
+            >
+              Delete
+            </Button>
+          </ConfirmDialog>
         </SheetFooter>
       </SheetContent>
     </Sheet>
