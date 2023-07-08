@@ -1,19 +1,18 @@
 import { currentUser } from '@clerk/nextjs/app-beta';
 
-import { GoalService } from '@targett/api/services';
-import { db } from '@targett/db';
 import { type ParsedGoal } from '@targett/db/schemas';
 
+import { createCaller } from '~/utils/caller';
 import { GoalCards } from '~/components/goal-cards';
 import { HomeActions } from '~/components/home-actions';
 
-const goalService = new GoalService(db);
 const DashboardPage = async () => {
   const user = await currentUser();
 
   let goals: ParsedGoal[] = [];
   if (user) {
-    goals = await goalService.all(user.id);
+    const caller = createCaller();
+    goals = await caller.goal.all();
   }
 
   return (
