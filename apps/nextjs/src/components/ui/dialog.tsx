@@ -47,7 +47,7 @@ const DialogBody = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0 fixed z-50 grid w-full gap-4 overflow-hidden rounded-b-lg border border-zinc-800 bg-zinc-900 shadow-lg sm:max-w-lg sm:rounded-lg',
+        'animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0 border-accent-200 fixed z-50 grid w-full gap-4 overflow-hidden rounded-b-lg border bg-zinc-900 shadow-lg sm:max-w-lg sm:rounded-lg',
         className
       )}
       {...props}
@@ -78,7 +78,7 @@ const DialogHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <header
     className={cn(
-      'flex flex-col space-y-1.5 border-b border-b-zinc-800 bg-zinc-950 px-8 pb-6 pt-8 text-center sm:text-left',
+      'bg-geist-background border-b-accent-200 flex flex-col space-y-1.5 border-b px-8 pb-6 pt-8 text-center sm:text-left',
       className
     )}
     {...props}
@@ -92,7 +92,7 @@ const DialogFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <footer
     className={cn(
-      'flex flex-col-reverse border-t border-zinc-800 bg-zinc-900 p-4 sm:flex-row sm:justify-end sm:space-x-2',
+      'bg-geist-background border-accent-200 flex flex-col-reverse border-t p-4 sm:flex-row sm:justify-end sm:space-x-2',
       className
     )}
     {...props}
