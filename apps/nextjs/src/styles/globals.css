@@ -46,3 +46,15 @@
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }
+
+@layer utilities {
+  .anim-delay-0 {
+    animation-delay: 0ms;
+  }
+  .anim-delay-200 {
+    animation-delay: 200ms;
+  }
+  .anim-delay-400 {
+    animation-delay: 400ms;
+  }
+}

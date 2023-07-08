@@ -16,6 +16,57 @@ export default {
     },
     extend: {
       colors: {
+        geist: {
+          DEFAULT: '#000',
+          background: '#000',
+          foreground: '#fff'
+        },
+        accent: {
+          100: '#111',
+          200: '#333',
+          300: '#444',
+          400: '#666',
+          500: '#888',
+          600: '#999',
+          700: '#eaeaea',
+          800: '#fafafa'
+        },
+        error: {
+          lighter: '#f7d4d6',
+          light: '#f33',
+          DEFAULT: 'red',
+          dark: '#e60000'
+        },
+        success: {
+          lighter: '#d3e5ff',
+          light: '#3291ff',
+          DEFAULT: '#0070f3',
+          dark: '#0761d1'
+        },
+        warning: {
+          lighter: '#ffefcf',
+          light: '#f7b955',
+          DEFAULT: '#f5a623',
+          dark: '#ab570a'
+        },
+        violet: {
+          lighter: '#d8ccf1',
+          light: '#8a63d2',
+          DEFAULT: '#7928ca',
+          dark: '#4c2889'
+        },
+        cyan: {
+          lighter: '#aaffec',
+          light: '#79ffe1',
+          DEFAULT: '#50e3c2',
+          dark: '#29bc9b'
+        },
+        highlight: {
+          purple: '#f81ce5',
+          magenta: '#eb367f',
+          pink: '#ff0080',
+          yellow: '#fff500'
+        },
         purple: {
           '050': '#f9f8ff',
           100: '#eeeaff',
@@ -50,10 +101,10 @@ export default {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))'
         },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
-        },
+        // accent: {
+        //   DEFAULT: 'hsl(var(--accent))',
+        //   foreground: 'hsl(var(--accent-foreground))'
+        // },
         popover: {
           DEFAULT: 'hsl(var(--popover))',
           foreground: 'hsl(var(--popover-foreground))'
@@ -76,11 +127,17 @@ export default {
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' }
+        },
+        flash: {
+          '0%': { opacity: '0.2' },
+          '20%': { opacity: '1' },
+          '100%': { opacity: '0.2' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out'
+        'accordion-up': 'accordion-up 0.2s ease-out',
+        flash: 'flash 1.4s infinite linear;'
       }
     }
   },

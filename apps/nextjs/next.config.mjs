@@ -14,7 +14,8 @@ const config = {
   typescript: { ignoreBuildErrors: !!process.env.CI },
   experimental: {
     appDir: true,
-    serverComponentsExternalPackages: ['better-sqlite3']
+    serverComponentsExternalPackages: ['better-sqlite3'],
+    serverActions: true
   }
 };
 
