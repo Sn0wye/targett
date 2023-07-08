@@ -1,5 +1,6 @@
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useClerk } from '@clerk/clerk-expo';
 import { Plus } from 'lucide-react-native';
 
 type NoGoalsProps = {
@@ -7,9 +8,14 @@ type NoGoalsProps = {
 };
 
 export const NoGoals = ({ onCreate }: NoGoalsProps) => {
+  const { signOut } = useClerk();
+
   return (
     <View className='flex-1 items-center justify-center'>
-      <Text className='text-center text-3xl text-white'>
+      <Text
+        className='text-center text-3xl text-white'
+        onPress={() => signOut()}
+      >
         Parece que você ainda não tem nenhuma meta :(
       </Text>
       <TouchableOpacity
