@@ -1,6 +1,6 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "globalDependencies": ["**/.env"],
+  "globalDependencies": ["**/.env", "tsconfig.json"],
   "pipeline": {
     "db:generate": {},
     "db:migrate": {},
@@ -33,6 +33,7 @@
     "VERCEL",
     "VERCEL_URL",
     "DATABASE_URL",
-    "DATABASE_AUTH_TOKEN"
+    "DATABASE_AUTH_TOKEN",
+    "EXPO_ROUTER_APP_ROOT"
   ]
 }
