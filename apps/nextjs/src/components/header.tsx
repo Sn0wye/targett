@@ -24,7 +24,7 @@ export const Header = () => {
   });
 
   return (
-    <header className='w-full border border-b-zinc-800 bg-zinc-950'>
+    <header className='w-full border-b border-b-zinc-800 bg-zinc-950'>
       <div className='flex h-[64px] w-full items-center justify-between px-6'>
         <div className='flex items-center gap-2'>
           <Image
