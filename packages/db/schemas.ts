@@ -19,9 +19,10 @@ export type ParsedGoal = z.output<typeof goalSchema>;
 
 export const createGoalSchema = createInsertSchema(goals, {
   id: schema => schema.id.optional().default(() => nanoid()),
+  userId: schema => schema.userId.min(1),
   name: schema => schema.name.min(1),
-  total: schema => schema.total.positive(),
-  current: schema => schema.current.nonnegative(),
+  total: schema => schema.total.positive().int(),
+  current: schema => schema.current.nonnegative().default(0),
   createdAt: z
     .date()
     .default(() => new Date())
