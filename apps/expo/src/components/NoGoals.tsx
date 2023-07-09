@@ -8,14 +8,9 @@ type NoGoalsProps = {
 };
 
 export const NoGoals = ({ onCreate }: NoGoalsProps) => {
-  const { signOut } = useClerk();
-
   return (
     <View className='flex-1 items-center justify-center'>
-      <Text
-        className='text-center text-3xl text-white'
-        onPress={() => signOut()}
-      >
+      <Text className='text-center text-3xl text-white'>
         Parece que você ainda não tem nenhuma meta :(
       </Text>
       <TouchableOpacity
