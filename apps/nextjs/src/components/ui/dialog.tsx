@@ -78,7 +78,7 @@ const DialogHeader = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <header
     className={cn(
-      'bg-geist-background border-b-accent-200 flex flex-col space-y-1.5 border-b px-8 pb-6 pt-8 text-center sm:text-left',
+      'border-b-accent-200 bg-geist-bg flex flex-col space-y-1.5 border-b px-8 pb-6 pt-8 text-center sm:text-left',
       className
     )}
     {...props}
@@ -92,7 +92,7 @@ const DialogFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <footer
     className={cn(
-      'bg-geist-background border-accent-200 flex flex-col-reverse border-t p-4 sm:flex-row sm:justify-end sm:space-x-2',
+      'bg-geist-bg border-accent-200 flex flex-col-reverse border-t p-4 sm:flex-row sm:justify-end sm:space-x-2',
       className
     )}
     {...props}
@@ -121,7 +121,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn('text-muted-foreground text-sm', className)}
+    className={cn('text-sm text-zinc-400', className)}
     {...props}
   />
 ));
@@ -133,7 +133,7 @@ const DialogClose = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Close
     className={cn(
-      'ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none',
+      'ring-offset-geist-bg focus:ring-geist-bg data-[state=open]:bg-accent absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:text-zinc-400',
       className
     )}
     {...props}

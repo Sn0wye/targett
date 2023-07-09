@@ -47,7 +47,7 @@ const SheetOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
     className={cn(
-      'bg-background/80 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in fixed inset-0 z-50 backdrop-blur-sm transition-all duration-100',
+      'bg-geist-bg/80 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in fixed inset-0 z-50 backdrop-blur-sm transition-all duration-100',
       className
     )}
     {...props}
@@ -160,7 +160,7 @@ const SheetContent = React.forwardRef<
       {...props}
     >
       {children}
-      <SheetPrimitive.Close className='ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none'>
+      <SheetPrimitive.Close className='ring-offset-geist-bg focus:ring-geist-bg data-[state=open]:bg-secondary absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none'>
         <X className='h-4 w-4' />
         <span className='sr-only'>Close</span>
       </SheetPrimitive.Close>
@@ -212,17 +212,17 @@ const SheetTitle = React.forwardRef<
 ));
 SheetTitle.displayName = SheetPrimitive.Title.displayName;
 
-// const SheetDescription = React.forwardRef<
-//   React.ElementRef<typeof SheetPrimitive.Description>,
-//   React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
-// >(({ className, ...props }, ref) => (
-//   <SheetPrimitive.Description
-//     ref={ref}
-//     className={cn('text-muted-foreground text-sm', className)}
-//     {...props}
-//   />
-// ));
-// SheetDescription.displayName = SheetPrimitive.Description.displayName;
+const SheetDescription = React.forwardRef<
+  React.ElementRef<typeof SheetPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <SheetPrimitive.Description
+    ref={ref}
+    className={cn('text-sm text-zinc-400', className)}
+    {...props}
+  />
+));
+SheetDescription.displayName = SheetPrimitive.Description.displayName;
 
 export {
   Sheet,
@@ -231,6 +231,6 @@ export {
   SheetContent,
   SheetHeader,
   SheetFooter,
-  SheetTitle
-  // SheetDescription
+  SheetTitle,
+  SheetDescription
 };
