@@ -6,8 +6,10 @@ export const goals = sqliteTable(
     id: text('id').primaryKey(),
     userId: text('userId').notNull(),
     name: text('title').notNull(),
+    description: text('description').notNull(),
     total: integer('total').notNull(),
     current: integer('current').notNull(),
+    deadline: text('deadline').notNull(),
     createdAt: text('createdAt').notNull(),
     updatedAt: text('updatedAt').notNull()
   },

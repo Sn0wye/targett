@@ -8,17 +8,18 @@
     "clean": "rm -rf .turbo node_modules",
     "with-env": "dotenv -e ../../.env --",
     "db:generate": "drizzle-kit generate:sqlite",
-    "db:migrate": "pnpm with-env tsx migrate.ts"
+    "db:migrate": "pnpm with-env tsx migrate.ts",
+    "db:studio": "pnpm with-env drizzle-kit studio"
   },
   "devDependencies": {
     "dotenv-cli": "^7.2.1",
-    "drizzle-kit": "^0.18.1",
+    "drizzle-kit": "^0.19.3",
     "tsx": "^3.12.7",
     "typescript": "^5.0.4"
   },
   "dependencies": {
     "@libsql/client": "^0.1.6",
-    "drizzle-orm": "^0.26.3",
-    "drizzle-zod": "^0.4.1"
+    "drizzle-orm": "^0.27.0",
+    "drizzle-zod": "^0.4.4"
   }
 }

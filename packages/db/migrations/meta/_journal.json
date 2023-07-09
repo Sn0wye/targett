@@ -8,6 +8,13 @@
       "when": 1683992370275,
       "tag": "0000_boring_jack_power",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1688927906041,
+      "tag": "0001_long_riptide",
+      "breakpoints": true
     }
   ]
 }

@@ -5,11 +5,7 @@ import { z } from 'zod';
 import { goals } from './schema';
 
 export const goalSchema = createSelectSchema(goals, {
-  id: schema => schema.id,
-  userId: schema => schema.userId,
-  name: schema => schema.name,
-  total: schema => schema.total,
-  current: schema => schema.current,
+  deadline: schema => schema.deadline.transform(date => new Date(date)),
   createdAt: schema => schema.createdAt.transform(date => new Date(date)),
   updatedAt: schema => schema.updatedAt.transform(date => new Date(date))
 });
@@ -21,8 +17,12 @@ export const createGoalSchema = createInsertSchema(goals, {
   id: schema => schema.id.optional().default(() => nanoid()),
   userId: schema => schema.userId.min(1),
   name: schema => schema.name.min(1),
-  total: schema => schema.total.positive().int(),
+  description: schema => schema.description.optional().default(''),
   current: schema => schema.current.nonnegative().default(0),
+  total: schema => schema.total.positive().int(),
+  deadline: z.date().min(new Date(), {
+    message: 'Deadline must be in the future'
+  }),
   createdAt: z
     .date()
     .default(() => new Date())

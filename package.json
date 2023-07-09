@@ -11,6 +11,7 @@
     "clean:workspaces": "turbo clean",
     "db:generate": "turbo db:generate",
     "db:migrate": "turbo db:migrate",
+    "db:studio": "turbo db:studio",
     "dev": "turbo dev --parallel",
     "dev:web": "turbo dev --filter=nextjs",
     "dev:native": "turbo dev --filter=expo",

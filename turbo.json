@@ -4,6 +4,7 @@
   "pipeline": {
     "db:generate": {},
     "db:migrate": {},
+    "db:studio": {},
     "dev": {
       "persistent": true,
       "cache": false
