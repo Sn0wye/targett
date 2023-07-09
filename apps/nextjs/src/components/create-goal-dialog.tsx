@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { useAuth } from '@clerk/nextjs';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -13,7 +14,8 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
-  DialogTitle
+  DialogTitle,
+  DialogTrigger
 } from '~/components/ui/dialog';
 import {
   Form,
@@ -32,21 +34,22 @@ type TransformedFormFields = z.output<typeof createGoalSchema>;
 type DialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  children: ReactNode;
 };
 
-export const CreateGoalDialog = ({ open, onOpenChange }: DialogProps) => {
+export const CreateGoalDialog = ({
+  open,
+  onOpenChange,
+  children
+}: DialogProps) => {
   const { userId } = useAuth();
   const form = useForm<FormFields>({
     resolver: zodResolver(createGoalSchema),
     defaultValues: {
       name: '',
-      current: 0,
-      total: 0,
-      userId: String(userId),
-      // @ts-expect-error Type 'Date' is not assignable to type 'string'
-      createdAt: new Date(),
-      // @ts-expect-error Type 'Date' is not assignable to type 'string'
-      updatedAt: new Date()
+      // @ts-ignore
+      total: '',
+      userId: String(userId)
     }
   });
 
@@ -59,9 +62,10 @@ export const CreateGoalDialog = ({ open, onOpenChange }: DialogProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogBody className='sm:max-w-[425px]'>
         <DialogHeader>
-          <DialogTitle>Nova Meta</DialogTitle>
+          <DialogTitle>New Goal</DialogTitle>
         </DialogHeader>
         <DialogContent>
           <Form<FormFields, TransformedFormFields> {...form}>
@@ -75,9 +79,9 @@ export const CreateGoalDialog = ({ open, onOpenChange }: DialogProps) => {
                 name='name'
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Nome</FormLabel>
+                    <FormLabel>Goal Name</FormLabel>
                     <FormControl>
-                      <Input placeholder='Ex: Comprar um carro' {...field} />
+                      <Input {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -88,12 +92,12 @@ export const CreateGoalDialog = ({ open, onOpenChange }: DialogProps) => {
                 name='total'
                 render={({ field: { onChange, ...field } }) => (
                   <FormItem>
-                    <FormLabel>Total de etapas</FormLabel>
+                    <FormLabel>Total Steps</FormLabel>
                     <FormControl>
                       <Input
-                        type='number'
-                        onChange={event => onChange(+event.target.value)}
                         {...field}
+                        type='number'
+                        onChange={e => onChange(+e.target.value)}
                       />
                     </FormControl>
                     <FormMessage />
@@ -105,10 +109,10 @@ export const CreateGoalDialog = ({ open, onOpenChange }: DialogProps) => {
         </DialogContent>
         <DialogFooter className='sm:justify-between'>
           <Button variant='outline' onClick={() => onOpenChange(false)}>
-            Cancelar
+            Cancel
           </Button>
           <Button type='submit' isLoading={isLoading} form='create-goal'>
-            Continuar
+            Create
           </Button>
         </DialogFooter>
       </DialogBody>
