@@ -2,10 +2,13 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
+import * as WebBrowser from 'expo-web-browser';
 import { useOAuth } from '@clerk/clerk-expo';
 
 import { useWarmUpBrowser } from '~/hooks/useWarmupBrowser';
 import { Github, Google } from '~/icons';
+
+WebBrowser.maybeCompleteAuthSession();
 
 const SignInScreen = () => {
   return (
@@ -60,7 +63,7 @@ const SignInWithOAuth = () => {
     <View className='h-full w-full items-center justify-center p-6'>
       <View className='mb-10 w-full'>
         <Image
-          source={require('@/logo.png')}
+          source={require('../../../assets/logo.png')}
           alt='targett logo'
           className='mb-10 h-40 w-40 self-center'
         />
