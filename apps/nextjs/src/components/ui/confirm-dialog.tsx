@@ -1,6 +1,6 @@
 'use client';
 
-import { type ReactNode } from 'react';
+import { ComponentProps, type ReactNode } from 'react';
 
 import {
   AlertDialog,
@@ -17,25 +17,26 @@ import { Button } from './button';
 
 type ConfirmDialogProps = {
   onConfirm?: () => void;
-  children: ReactNode;
+  children?: ReactNode;
   description?: ReactNode;
   title?: string;
   isLoading: boolean;
-};
+} & ComponentProps<typeof AlertDialog>;
 
 export const ConfirmDialog = ({
   onConfirm,
   children,
   title,
   description,
-  isLoading
+  isLoading,
+  ...props
 }: ConfirmDialogProps) => {
   const handleConfirm = () => {
     onConfirm?.();
   };
 
   return (
-    <AlertDialog>
+    <AlertDialog {...props}>
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

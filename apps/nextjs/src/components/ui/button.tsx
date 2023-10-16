@@ -8,7 +8,7 @@ import { LoadingDots } from './loading-dots';
 //TODO: add secondary and destructive variants
 
 const buttonVariants = cva(
-  'flex items-center rounded-md text-sm border font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-100 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-geist-bg group',
+  'flex items-center rounded-md text-sm font-medium border transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-100 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-geist-bg group',
   {
     variants: {
       variant: {
@@ -16,7 +16,8 @@ const buttonVariants = cva(
           'bg-zinc-100 text-black hover:bg-zinc-950 hover:text-zinc-100 border-zinc-100',
         outline:
           'bg-zinc-950 text-zinc-400 border border-accent-200 hover:text-zinc-100 hover:border-zinc-100 active:bg-zinc-800 focus-visible:ring-accent-200',
-        destructive: 'bg-red-900 text-red-50 hover:bg-red-900/90',
+        destructive:
+          'bg-red-900 text-red-50 hover:bg-red-900/90 border-transparent',
         secondary: 'bg-zinc-800 text-zinc-50 hover:bg-zinc-800/80',
         ghost: 'hover:bg-zinc-800 hover:text-zinc-50',
         link: 'text-zinc-50 underline-offset-4 hover:underline'

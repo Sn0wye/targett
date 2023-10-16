@@ -12,7 +12,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div
         className={cn(
-          'inline-flex h-10 w-full rounded-md border border-zinc-800 bg-zinc-950 px-3 text-sm text-inherit text-zinc-100 transition-[border-color_150ms_ease] focus-within:border-zinc-300'
+          'border-accent-200 inline-flex h-10 w-full rounded-md border bg-zinc-950 px-3 text-sm text-inherit text-zinc-100 transition-[border-color_150ms_ease] focus-within:border-zinc-300'
         )}
       >
         {leftIcon && (

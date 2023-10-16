@@ -9,8 +9,8 @@ export const SignedOut = () => {
   const { openSignIn } = useClerk();
 
   return (
-    <div className='flex flex-col items-center justify-center gap-6 rounded-lg border border-zinc-800 bg-zinc-950 px-16 py-12 pt-6'>
-      <div className='rounded-lg border border-zinc-800 p-3'>
+    <div className='border-accent-200 flex flex-col items-center justify-center gap-6 rounded-lg border bg-zinc-950 px-16 py-12 pt-6'>
+      <div className='border-accent-200 rounded-lg border p-3'>
         <UserX className='h-8 w-8 text-zinc-300' />
       </div>
       <div className='flex flex-col items-center gap-2'>
