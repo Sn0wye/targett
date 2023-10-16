@@ -20,17 +20,41 @@ export const createGoalSchema = createInsertSchema(goals, {
   description: schema => schema.description.optional().default(''),
   current: schema => schema.current.nonnegative().default(0),
   total: schema => schema.total.positive().int(),
-  deadline: z.date().min(new Date(), {
-    message: 'Deadline must be in the future'
-  }),
+  deadline: z
+    .date()
+    .min(new Date(), {
+      message: 'Deadline must be in the future'
+    })
+    .or(z.string().min(1))
+    .transform(date => {
+      if (typeof date === 'string') {
+        return date;
+      }
+
+      return date.toISOString();
+    }),
   createdAt: z
     .date()
+    .or(z.string().min(1))
     .default(() => new Date())
-    .transform(date => date.toISOString()),
+    .transform(date => {
+      if (typeof date === 'string') {
+        return date;
+      }
+
+      return date.toISOString();
+    }),
   updatedAt: z
     .date()
+    .or(z.string().min(1))
     .default(() => new Date())
-    .transform(date => date.toISOString())
+    .transform(date => {
+      if (typeof date === 'string') {
+        return date;
+      }
+
+      return date.toISOString();
+    })
 });
 
 export type CreateGoalInput = z.input<typeof createGoalSchema>;

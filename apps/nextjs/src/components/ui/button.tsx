@@ -55,7 +55,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const Comp = asChild ? Slot : 'button';
-    const content = isLoading ? <LoadingDots variant='light' /> : children;
+    const content = isLoading ? <LoadingDots /> : children;
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}

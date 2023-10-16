@@ -9,6 +9,8 @@ import { protectedProcedure, router } from '../trpc';
 
 export const goalRouter = router({
   all: protectedProcedure.query(({ ctx }) => {
+    console.log('auth', ctx.auth);
+
     const goalService = new GoalService(ctx.db);
     return goalService.all(ctx.auth.userId);
   }),

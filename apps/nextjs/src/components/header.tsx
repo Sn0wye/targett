@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useSelectedLayoutSegment } from 'next/navigation';
 import { UserButton, useUser } from '@clerk/nextjs';
 
-import { CustomSignIn } from '~/app/signin';
+import { SignInButton } from '~/app/sign-in-button';
 import { useTabs } from '~/hooks/use-tabs';
 import { Icons } from './icons';
 import { Tabs } from './tabs';
@@ -37,7 +37,7 @@ export const Header = () => {
           <Icons.Geist />
           <h1 className='text-2xl font-bold text-zinc-100'>targett</h1>
         </div>
-        <div>{isSignedIn ? <UserButton /> : <CustomSignIn />}</div>
+        <div>{isSignedIn ? <UserButton /> : <SignInButton />}</div>
       </div>
       <div className='flex h-[48px] items-center px-6'>
         <Tabs {...tabs.tabProps} />

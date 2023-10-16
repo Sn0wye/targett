@@ -2,7 +2,7 @@
 
 import { useClerk } from '@clerk/nextjs';
 
-export const CustomSignOut = () => {
+export const SignOutButton = () => {
   const { signOut } = useClerk();
 
   return <button onClick={() => signOut()}>Sign Out</button>;

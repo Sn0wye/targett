@@ -55,9 +55,7 @@
       "indexes": {
         "userIdIndex": {
           "name": "userIdIndex",
-          "columns": [
-            "userId"
-          ],
+          "columns": ["userId"],
           "isUnique": false
         }
       },

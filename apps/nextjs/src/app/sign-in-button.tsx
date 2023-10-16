@@ -2,7 +2,7 @@
 
 import { useClerk } from '@clerk/nextjs/app-beta/client';
 
-export const CustomSignIn = () => {
+export const SignInButton = () => {
   const { openSignIn } = useClerk();
 
   return (
