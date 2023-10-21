@@ -134,7 +134,7 @@ export const CreateGoalDialog = ({
                   <FormItem>
                     <FormLabel>Deadline</FormLabel>
                     <Popover>
-                      <PopoverTrigger asChild>
+                      <PopoverTrigger asChild className='focus:ring-none'>
                         <FormControl className='w-full'>
                           <Button
                             variant='outline'

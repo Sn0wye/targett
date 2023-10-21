@@ -31,7 +31,7 @@ const TabsLayout = () => {
         <Tabs.Screen
           name='index'
           options={{
-            title: 'Dashboard',
+            tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => (
               <Home color={focused ? '#FFF' : '#A9A9B2'} />
             )

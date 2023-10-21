@@ -14,7 +14,7 @@ import { NoGoals } from '~/components/NoGoals';
 
 const Home = () => {
   const [isNewGoalModalOpen, setIsNewGoalModalOpen] = React.useState(false);
-  const { data } = api.goal.all.useQuery();
+  const { isLoading, data } = api.goal.all.useQuery();
 
   const toggleNewGoalModal = () => {
     setIsNewGoalModalOpen(!isNewGoalModalOpen);
@@ -25,7 +25,13 @@ const Home = () => {
       <View className='h-full w-full'>
         <Header />
         <SignedIn>
-          {data && data.length > 0 ? (
+          {isLoading && (
+            <View className='flex-1 items-center justify-center'>
+              <Text className='text-2xl text-white'>Loading...</Text>
+            </View>
+          )}
+
+          {!isLoading && data && data.length > 0 && (
             <FlashList
               data={data}
               keyExtractor={goal => goal.id}
@@ -33,10 +39,11 @@ const Home = () => {
               estimatedItemSize={154}
               ItemSeparatorComponent={() => <View className='h-2' />}
             />
-          ) : (
+          )}
+          {!isLoading && data && data.length === 0 && (
             <NoGoals onCreate={toggleNewGoalModal} />
           )}
-          {data && data.length > 0 && (
+          {!isLoading && data && data.length > 0 && (
             <TouchableOpacity
               className={cn(
                 'absolute right-0 h-12 w-12 items-center justify-center rounded-lg bg-orange-500',
